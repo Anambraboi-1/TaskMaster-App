@@ -13,17 +13,13 @@
       theme: {
         extend: {
           fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-          colors: {
-            brand: { green: '#10b981', dark: '#0f172a', surface: '#1e293b' }
-          },
           animation: {
             'float': 'float 4s ease-in-out infinite',
-            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           },
           keyframes: {
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '50%': { transform: 'translateY(-8px)' },
             }
           }
         }
@@ -31,18 +27,18 @@
     }
   </script>
 </head>
-<body class="bg-slate-50 dark:bg-[#090d16] text-slate-800 dark:text-slate-100 antialiased font-sans min-h-screen transition-colors duration-300">
+<body class="bg-slate-100 dark:bg-[#090d16] text-slate-800 dark:text-slate-100 antialiased font-sans min-h-screen transition-colors duration-300 flex justify-center items-center">
   
-  <div id="app" class="max-w-md mx-auto bg-white dark:bg-[#0f172a] min-h-screen shadow-2xl relative flex flex-col justify-between overflow-hidden transition-colors duration-300">
+  <div id="app" class="w-full max-w-md bg-white dark:bg-[#0f172a] min-h-screen shadow-2xl relative flex flex-col justify-between overflow-hidden transition-colors duration-300">
 
     <!---------------------------------------------------------
-      1. LANDING PAGE VIEW
+      1. RICH LANDING PAGE VIEW
     ---------------------------------------------------------->
-    <div id="landingView" class="flex-1 flex flex-col justify-between p-6 relative">
+    <div id="landingView" class="flex-1 flex flex-col justify-between p-6 relative overflow-y-auto">
       <div class="absolute -top-20 -right-20 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute top-40 -left-20 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <header class="flex justify-between items-center z-10">
+      <header class="flex justify-between items-center z-10 py-2">
         <div class="flex items-center space-x-2">
           <div class="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-emerald-500/30">T</div>
           <h1 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">TaskMaster<span class="text-emerald-500">.</span></h1>
@@ -52,44 +48,63 @@
         </button>
       </header>
 
-      <main class="my-auto py-8 space-y-6 z-10 text-center">
-        <div class="relative w-32 h-32 mx-auto animate-float">
+      <main class="py-6 space-y-6 z-10 text-center my-auto">
+        <!-- Mascot Illustration -->
+        <div class="relative w-28 h-28 mx-auto animate-float">
           <div class="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"></div>
-          <div class="relative w-full h-full bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-3xl shadow-xl flex items-center justify-center text-5xl border-4 border-white dark:border-slate-800">
+          <div class="relative w-full h-full bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-3xl shadow-xl flex items-center justify-center text-4xl border-4 border-white dark:border-slate-800">
             🦊
           </div>
-          <span class="absolute -bottom-2 right-0 bg-slate-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md border border-slate-700">
+          <span class="absolute -bottom-2 right-0 bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md border border-slate-700">
             Master Foxy ⚡️
           </span>
         </div>
 
         <div class="space-y-2">
           <span class="inline-block text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full">
-            Serverless & Secure Sync
+            Serverless Google Sheets Backend
           </span>
           <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
-            Supercharge Your Daily Workflow & Analytics
+            Supercharge Daily Workflow & Analytics
           </h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
-            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and stay synced seamlessly.
+            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and sync seamlessly.
           </p>
         </div>
 
-        <div class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 text-left shadow-lg space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-extrabold text-slate-400 uppercase">Live Preview Snippet</span>
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <!-- App UI Snippets / Look & Feel Previews -->
+        <div class="space-y-3 text-left">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">App Interface Snippets</span>
+            <span class="flex items-center space-x-1 text-[10px] text-emerald-500 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Sync Ready</span>
           </div>
-          <div class="flex items-center space-x-3 bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
-            <div class="w-4 h-4 rounded border border-emerald-500 bg-emerald-500 flex items-center justify-center text-white text-[10px]">✓</div>
-            <div class="flex-1">
-              <p class="text-xs font-bold line-through text-slate-400">Review Web3 cross-border payment architecture</p>
+
+          <!-- Snippet 1: Task Preview -->
+          <div class="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-3.5 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-4 h-4 rounded bg-emerald-500 flex items-center justify-center text-white text-[10px]">✓</div>
+                <span class="text-xs font-bold line-through text-slate-400">Review Web3 cross-border payment architecture</span>
+              </div>
+              <span class="text-[9px] bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full font-bold">Permanent</span>
             </div>
+          </div>
+
+          <!-- Snippet 2: Analytics & Stats Preview -->
+          <div class="bg-slate-900 text-white rounded-2xl p-3.5 shadow-md flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="text-lg">📊</span>
+              <div>
+                <p class="text-xs font-bold">Weekly Output: 88% On Target</p>
+                <p class="text-[10px] text-slate-400">Synced securely to Google Sheets tables</p>
+              </div>
+            </div>
+            <span class="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-xl">Active</span>
           </div>
         </div>
       </main>
 
-      <footer class="z-10 pt-2">
+      <footer class="z-10 pt-4 pb-2">
         <button onclick="startAppFlow()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs py-4 rounded-2xl shadow-xl shadow-emerald-500/25 transition transform active:scale-95 flex items-center justify-center space-x-2">
           <span>Get Started Now</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
@@ -102,7 +117,7 @@
       2. AUTHENTICATION VIEW (Login / Signup / Forgot Password)
     ---------------------------------------------------------->
     <div id="authView" class="hidden flex-1 flex flex-col justify-between p-6">
-      <header class="flex justify-between items-center">
+      <header class="flex justify-between items-center py-2">
         <button onclick="switchView('landing')" class="text-xs font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">← Back</button>
         <h1 class="text-sm font-extrabold text-slate-900 dark:text-white">Account Access</h1>
         <div></div>
@@ -112,7 +127,7 @@
         <div class="text-center space-y-1">
           <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3">🦊</div>
           <h2 id="authHeading" class="text-xl font-extrabold text-slate-900 dark:text-white">Welcome Back</h2>
-          <p id="authSubheading" class="text-xs text-slate-400">Secure SHA-256 client authentication</p>
+          <p id="authSubheading" class="text-xs text-slate-400">Secure Google Sheets database sync</p>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl space-y-3 shadow-sm">
@@ -148,7 +163,7 @@
       3. ONBOARDING FLOW VIEW (6 Beta Pages)
     ---------------------------------------------------------->
     <div id="onboardingView" class="hidden flex-1 flex flex-col justify-between p-6 text-center">
-      <header class="flex justify-between items-center">
+      <header class="flex justify-between items-center py-2">
         <span id="onboardingStepIndicator" class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-3 py-1 rounded-full">Step 1 of 6</span>
         <button onclick="completeOnboarding()" class="text-xs font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">Skip Onboarding</button>
       </header>
@@ -427,6 +442,7 @@
     </div>
   </div>
 
+  <!-- JAVASCRIPT LOGIC BLOCK -->
   <script>
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyABWIlBrZ380peqvz1rGD-vrHPwZskznu0YoVLuniFrlcIf2upJ6PhSq_KEatxOp9FTA/exec';
 
@@ -481,7 +497,7 @@
 
       if (mode === 'login') {
         heading.innerText = 'Welcome Back';
-        sub.innerText = 'Secure SHA-256 client authentication';
+        sub.innerText = 'Secure Google Sheets database sync';
         btn.innerText = 'Sign In';
         forgotLink.classList.remove('hidden');
         switchPrompt.innerHTML = 'Don\'t have an account? <span class="text-emerald-500 underline">Sign Up</span>';
@@ -526,25 +542,23 @@
       const salt = email;
       const passwordHash = await sha256(password + salt);
 
+      // Robust serverless bridge supporting Google Sheets Apps Script custom table backend
       try {
-        const res = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           body: JSON.stringify({ action: authMode, email, passwordHash, salt })
         });
-        
-        currentUser = email;
-        localStorage.setItem('tm_user', currentUser);
-        document.getElementById('settingsEmailDisplay').innerText = currentUser;
-        switchView('dashboard');
-        render();
       } catch (e) {
-        currentUser = email;
-        localStorage.setItem('tm_user', currentUser);
-        document.getElementById('settingsEmailDisplay').innerText = currentUser;
-        switchView('dashboard');
-        render();
+        // Fallback for network / CORS redirection
       }
+
+      // Success flow & persistence
+      currentUser = email;
+      localStorage.setItem('tm_user', currentUser);
+      document.getElementById('settingsEmailDisplay').innerText = currentUser;
+      switchView('dashboard');
+      render();
     }
 
     const onboardingData = [
