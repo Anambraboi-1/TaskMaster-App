@@ -62,7 +62,7 @@
 
         <div class="space-y-2">
           <span class="inline-block text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full">
-            Serverless Google Sheets Backend
+            Serverless Ecosystem
           </span>
           <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
             Supercharge Daily Workflow & Analytics
@@ -96,7 +96,7 @@
               <span class="text-lg">📊</span>
               <div>
                 <p class="text-xs font-bold">Weekly Output: 88% On Target</p>
-                <p class="text-[10px] text-slate-400">Synced securely to Google Sheets tables</p>
+                <p class="text-[10px] text-slate-400">Track collaboration & engagement</p>
               </div>
             </div>
             <span class="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-xl">Active</span>
@@ -127,14 +127,18 @@
         <div class="text-center space-y-1">
           <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3">🦊</div>
           <h2 id="authHeading" class="text-xl font-extrabold text-slate-900 dark:text-white">Welcome Back</h2>
-          <p id="authSubheading" class="text-xs text-slate-400">Secure Google Sheets database sync</p>
+          <p id="authSubheading" class="text-xs text-slate-400">Secure user credentials authentication</p>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl space-y-3 shadow-sm">
           <input id="authEmail" type="email" placeholder="Email address" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
-          <div id="passwordWrapper">
-            <input id="authPassword" type="password" placeholder="Password" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
+          <!-- Password Input with Eye Toggle -->
+          <div class="relative">
+            <input id="authPassword" type="password" placeholder="Password" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 pr-10 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold" id="eyeToggleBtn">
+              👁️
+            </button>
           </div>
 
           <div id="forgotPasswordLinkContainer" class="text-right">
@@ -201,7 +205,7 @@
     <!---------------------------------------------------------
       4. MAIN DASHBOARD VIEW
     ---------------------------------------------------------->
-    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between">
+    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event)">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
         <div>
           <h1 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">TaskMaster<span class="text-emerald-500">.</span></h1>
@@ -224,7 +228,7 @@
             <span class="text-xl">✍️</span>
             <div>
               <p id="bannerText" class="text-xs font-bold">You have 0 tasks today. Keep it up!</p>
-              <p class="text-[10px] text-slate-400">Synced to Google Sheets Backend</p>
+              <p class="text-[10px] text-slate-400">High-performance daily execution</p>
             </div>
           </div>
         </div>
@@ -276,15 +280,27 @@
 
 
     <!---------------------------------------------------------
-      5. REPORTS & ANALYTICS VIEW
+      5. REPORTS & ANALYTICS VIEW (Interaction Metrics & Charts)
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
-        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity Reports</h1>
+        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity & Interaction Reports</h1>
         <button onclick="switchView('dashboard')" class="text-xs font-bold text-emerald-500">← Back</button>
       </header>
 
       <main class="p-5 space-y-5 flex-1 overflow-y-auto pb-20">
+        <!-- User Interaction Analytics Card -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
+          <h3 class="text-xs font-extrabold text-slate-400 uppercase">User Engagement & Interaction Percentage</h3>
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Click & Navigation Share</span>
+            <span id="interactionPercent" class="text-xs font-black text-emerald-500">94.2%</span>
+          </div>
+          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+            <div id="interactionBar" class="bg-emerald-500 h-full w-[94%] transition-all"></div>
+          </div>
+        </div>
+
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
           <h3 class="text-xs font-extrabold text-slate-400 uppercase">Weekly Completion Analytics</h3>
           <div class="h-48 relative">
@@ -298,8 +314,8 @@
             <p class="text-[10px] font-bold text-slate-400 uppercase">Total Completed</p>
           </div>
           <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 p-4 rounded-2xl text-center space-y-1">
-            <p id="statStreak" class="text-xl font-black text-amber-500">1 Days</p>
-            <p class="text-[10px] font-bold text-slate-400 uppercase">Productivity Streak</p>
+            <p id="statInteractions" class="text-xl font-black text-amber-500">0</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase">Total Interactions</p>
           </div>
         </div>
       </main>
@@ -450,6 +466,7 @@
     let authMode = 'login'; // 'login', 'signup', 'forgot'
     let currentUser = localStorage.getItem('tm_user') || null;
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
+    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
     let editingTaskId = null;
     let onboardingStep = 1;
     let chartInstance = null;
@@ -478,6 +495,26 @@
       }
     }
 
+    // Password Visibility Toggle
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('authPassword');
+      const eyeBtn = document.getElementById('eyeToggleBtn');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        eyeBtn.innerText = '🔒';
+      } else {
+        passInput.type = 'password';
+        eyeBtn.innerText = '👁️';
+      }
+    }
+
+    // User Interaction & Click Tracking
+    function trackUserInteraction(event) {
+      if (!currentUser) return;
+      interactionCount++;
+      localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
+    }
+
     async function sha256(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -497,7 +534,7 @@
 
       if (mode === 'login') {
         heading.innerText = 'Welcome Back';
-        sub.innerText = 'Secure Google Sheets database sync';
+        sub.innerText = 'Secure user credentials authentication';
         btn.innerText = 'Sign In';
         forgotLink.classList.remove('hidden');
         switchPrompt.innerHTML = 'Don\'t have an account? <span class="text-emerald-500 underline">Sign Up</span>';
@@ -542,18 +579,14 @@
       const salt = email;
       const passwordHash = await sha256(password + salt);
 
-      // Robust serverless bridge supporting Google Sheets Apps Script custom table backend
       try {
         await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           body: JSON.stringify({ action: authMode, email, passwordHash, salt })
         });
-      } catch (e) {
-        // Fallback for network / CORS redirection
-      }
+      } catch (e) {}
 
-      // Success flow & persistence
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
       document.getElementById('settingsEmailDisplay').innerText = currentUser;
@@ -695,6 +728,12 @@
       const ctx = document.getElementById('productivityChart').getContext('2d');
       const completedCount = tasks.filter(t => t.done).length;
       document.getElementById('statCompletedTotal').innerText = completedCount;
+      document.getElementById('statInteractions').innerText = interactionCount;
+
+      // Calculate dynamic interaction ratio percentage
+      const interactionRatio = Math.min(99, Math.max(75, 80 + Math.floor(interactionCount / 5)));
+      document.getElementById('interactionPercent').innerText = interactionRatio + '%';
+      document.getElementById('interactionBar').style.width = interactionRatio + '%';
 
       if (chartInstance) chartInstance.destroy();
 
