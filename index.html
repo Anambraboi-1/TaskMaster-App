@@ -142,7 +142,7 @@
 
 
     <!---------------------------------------------------------
-      4. CLEAN MAIN DASHBOARD VIEW
+      4. DASHBOARD VIEW
     ---------------------------------------------------------->
     <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -260,7 +260,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW (Contains Compact Heatmap & Multi-Charts)
+      6. PROGRESS VIEW (Tiny GitHub Grid at Bottom)
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -269,15 +269,6 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Compact GitHub Heatmap Grid -->
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-3 space-y-2 shadow-sm">
-          <div class="flex justify-between items-center">
-            <h3 class="text-[11px] font-extrabold uppercase text-slate-400">Activity Heatmap</h3>
-            <span class="text-[9px] text-emerald-500 font-bold">Live Grid</span>
-          </div>
-          <div class="grid grid-cols-14 gap-1 p-1.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800" id="compactHeatmapGrid"></div>
-        </div>
-
         <!-- Scope Controls -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
           <button onclick="setProgressScope('day')" id="scopeBtnDay" class="flex-1 py-2 rounded-xl transition">Day</button>
@@ -288,7 +279,7 @@
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
           <h3 id="progressScopeTitle" class="text-xs font-extrabold uppercase text-slate-400">MONTHLY PROGRESS ANALYTICS</h3>
-          <div class="h-44 relative">
+          <div class="h-48 relative">
             <canvas id="progressMonthChart"></canvas>
           </div>
         </div>
@@ -297,6 +288,26 @@
           <h3 class="text-xs font-extrabold uppercase text-slate-400">Archived Task Log</h3>
           <div id="monthlyProgressDisplay" class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
             Loading archived logs...
+          </div>
+        </div>
+
+        <!-- TINY GITHUB-STYLE CONTRIBUTION MATRIX AT THE BOTTOM -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-3.5 space-y-2 shadow-sm">
+          <div class="flex justify-between items-center">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">GitHub Activity Matrix</span>
+            <div class="flex items-center space-x-1 text-[9px] text-slate-400">
+              <span>Less</span>
+              <span class="w-2 h-2 rounded-sm bg-slate-200 dark:bg-slate-800"></span>
+              <span class="w-2 h-2 rounded-sm bg-emerald-200 dark:bg-emerald-900"></span>
+              <span class="w-2 h-2 rounded-sm bg-emerald-400"></span>
+              <span class="w-2 h-2 rounded-sm bg-emerald-600"></span>
+              <span>More</span>
+            </div>
+          </div>
+
+          <!-- Micro Grid Scroll Container -->
+          <div class="overflow-x-auto pb-1">
+            <div id="githubMicroMatrix" class="inline-grid grid-rows-7 grid-flow-col gap-[3px] p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800"></div>
           </div>
         </div>
       </main>
@@ -370,7 +381,7 @@
     </div>
   </div>
 
-  <!-- STANDARDIZED SIDE MENU DRAWER (☰) WITH VISIBLE TASK HISTORY -->
+  <!-- STANDARDIZED SIDE MENU DRAWER (☰) -->
   <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
     <div class="space-y-4 overflow-y-auto flex-1">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-800">
@@ -446,7 +457,7 @@
       if (viewName === 'dashboard') renderDashboardPie();
       if (viewName === 'reports') renderReportsChart(activeChartType);
       if (viewName === 'progress') {
-        renderCompactHeatmap();
+        renderGitHubMicroMatrix();
         renderProgressView();
       }
 
@@ -690,18 +701,22 @@
       });
     }
 
-    function renderCompactHeatmap() {
-      const grid = document.getElementById('compactHeatmapGrid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      for (let i = 0; i < 28; i++) {
-        const level = (i + interactionCount) % 4;
-        let colorClass = 'bg-slate-200 dark:bg-slate-800';
-        if (level === 1) colorClass = 'bg-emerald-300/60 dark:bg-emerald-900/40';
-        if (level === 2) colorClass = 'bg-emerald-400 dark:bg-emerald-600';
-        if (level === 3) colorClass = 'bg-emerald-500 shadow-sm';
+    // AUTHENTIC 52-WEEK GITHUB TINY MICRO MATRIX BUILDER
+    function renderGitHubMicroMatrix() {
+      const matrix = document.getElementById('githubMicroMatrix');
+      if (!matrix) return;
+      matrix.innerHTML = '';
 
-        grid.innerHTML += `<div class="w-full h-3.5 rounded ${colorClass}" title="Day ${i + 1}"></div>`;
+      // 52 Weeks x 7 Days = 364 Tiny Squares (10px size)
+      const totalDays = 52 * 7;
+      for (let day = 0; day < totalDays; day++) {
+        const seed = (day * 13 + interactionCount) % 10;
+        let colorClass = 'bg-slate-200 dark:bg-slate-800'; // level 0
+        if (seed === 3 || seed === 7) colorClass = 'bg-emerald-200 dark:bg-emerald-900/60'; // level 1
+        else if (seed === 5 || seed === 8) colorClass = 'bg-emerald-400'; // level 2
+        else if (seed === 9) colorClass = 'bg-emerald-600 shadow-sm'; // level 3
+
+        matrix.innerHTML += `<div class="w-2.5 h-2.5 rounded-[2px] ${colorClass}"></div>`;
       }
     }
 
