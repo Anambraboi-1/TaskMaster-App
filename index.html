@@ -13,9 +13,7 @@
       theme: {
         extend: {
           fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-          animation: {
-            'float': 'float 4s ease-in-out infinite',
-          },
+          animation: { 'float': 'float 4s ease-in-out infinite' },
           keyframes: {
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
@@ -32,7 +30,7 @@
   <div id="app" class="w-full max-w-md bg-white dark:bg-[#0f172a] min-h-screen shadow-2xl relative flex flex-col justify-between overflow-hidden transition-colors duration-300">
 
     <!---------------------------------------------------------
-      1. RICH LANDING PAGE VIEW
+      1. LANDING PAGE VIEW
     ---------------------------------------------------------->
     <div id="landingView" class="flex-1 flex flex-col justify-between p-6 relative overflow-y-auto">
       <div class="absolute -top-20 -right-20 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -67,36 +65,8 @@
             Supercharge Daily Workflow & Analytics
           </h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
-            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and sync seamlessly.
+            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and stay synced seamlessly.
           </p>
-        </div>
-
-        <div class="space-y-3 text-left">
-          <div class="flex items-center justify-between px-1">
-            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">App Interface Snippets</span>
-            <span class="flex items-center space-x-1 text-[10px] text-emerald-500 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Active</span>
-          </div>
-
-          <div class="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-3.5 shadow-sm space-y-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2.5">
-                <div class="w-4 h-4 rounded bg-emerald-500 flex items-center justify-center text-white text-[10px]">✓</div>
-                <span class="text-xs font-bold line-through text-slate-400">Review Web3 cross-border payment architecture</span>
-              </div>
-              <span class="text-[9px] bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full font-bold">Permanent</span>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 text-white rounded-2xl p-3.5 shadow-md flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-              <span class="text-lg">📊</span>
-              <div>
-                <p class="text-xs font-bold">Weekly Output: 88% On Target</p>
-                <p class="text-[10px] text-slate-400">Track collaboration & engagement</p>
-              </div>
-            </div>
-            <span class="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-xl">Active</span>
-          </div>
         </div>
       </main>
 
@@ -131,65 +101,42 @@
           
           <div class="relative">
             <input id="authPassword" type="password" placeholder="Password" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 pr-10 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
-            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold" id="eyeToggleBtn">
-              👁️
-            </button>
-          </div>
-
-          <div id="forgotPasswordLinkContainer" class="text-right">
-            <button onclick="switchAuthMode('forgot')" class="text-[11px] font-bold text-emerald-500 hover:underline">Forgot password?</button>
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold" id="eyeToggleBtn">👁️</button>
           </div>
 
           <button id="authActionBtn" onclick="processAuth()" class="w-full bg-emerald-500 text-white font-bold text-xs py-3 rounded-2xl hover:bg-emerald-600 transition shadow-sm">
             Sign In
           </button>
-          
           <p id="authErrorMsg" class="text-[11px] text-center font-medium text-rose-500 hidden"></p>
         </div>
-
-        <div class="text-center space-y-2">
-          <button id="authSwitchPromptBtn" onclick="switchAuthMode('signup')" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-emerald-500">
-            Don't have an account? <span class="text-emerald-500 underline">Sign Up</span>
-          </button>
-        </div>
       </main>
-
       <footer></footer>
     </div>
 
 
     <!---------------------------------------------------------
-      3. ONBOARDING FLOW VIEW
+      3. ONBOARDING VIEW
     ---------------------------------------------------------->
     <div id="onboardingView" class="hidden flex-1 flex flex-col justify-between p-6 text-center">
       <header class="flex justify-between items-center py-2">
         <span id="onboardingStepIndicator" class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-3 py-1 rounded-full">Step 1 of 6</span>
-        <button onclick="completeOnboarding()" class="text-xs font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">Skip Onboarding</button>
+        <button onclick="completeOnboarding()" class="text-xs font-bold text-slate-400">Skip</button>
       </header>
-
       <main class="my-auto space-y-6 py-4">
-        <div id="onboardingIllustration" class="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-inner">
-          🚀
-        </div>
-
+        <div id="onboardingIllustration" class="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-inner">🚀</div>
         <div class="space-y-2 px-2">
           <h2 id="onboardingTitle" class="text-xl font-extrabold text-slate-900 dark:text-white">Welcome to TaskMaster</h2>
-          <p id="onboardingDesc" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            Your personal serverless productivity suite designed for high performers and Web3 builders.
-          </p>
+          <p id="onboardingDesc" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Your personal serverless productivity suite.</p>
         </div>
       </main>
-
       <footer>
-        <button onclick="nextOnboardingStep()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3.5 rounded-2xl shadow-lg transition">
-          Continue
-        </button>
+        <button onclick="nextOnboardingStep()" class="w-full bg-emerald-500 text-white font-bold text-xs py-3.5 rounded-2xl shadow-lg">Continue</button>
       </footer>
     </div>
 
 
     <!---------------------------------------------------------
-      4. MAIN DASHBOARD VIEW (With Pie Chart & Circular Time Picker)
+      4. MAIN DASHBOARD VIEW
     ---------------------------------------------------------->
     <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event)">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -198,32 +145,27 @@
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="requestNotificationPermission()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Enable Notifications">
-            🔔
-          </button>
-          <button onclick="switchView('settings')" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition">
-            ⚙️
-          </button>
+          <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Daily Drawer">📅</button>
+          <button onclick="switchView('settings')" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition">⚙️</button>
         </div>
       </header>
 
       <main class="p-5 pt-3 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Banner without sync text -->
         <div class="bg-slate-900 text-white rounded-3xl p-4 flex items-center justify-between shadow-lg relative overflow-hidden">
           <div class="absolute -right-6 -bottom-6 text-6xl opacity-10">🦊</div>
           <div class="flex items-center space-x-3 z-10">
             <span class="text-xl">✍️</span>
             <div>
-              <p id="bannerText" class="text-xs font-bold">You have 0 tasks today. Keep it up!</p>
+              <p id="bannerText" class="text-xs font-bold">You have 0 tasks today.</p>
               <p class="text-[10px] text-slate-400">High-performance daily execution</p>
             </div>
           </div>
         </div>
 
-        <!-- Dashboard Mini Pie Chart Preview -->
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between">
+        <!-- Dashboard Live Pie Chart & Stats -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
-            <h4 class="text-xs font-extrabold uppercase text-slate-400">Status Overview</h4>
+            <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
             <p id="dashboardStatusSub" class="text-[11px] font-bold text-slate-700 dark:text-slate-200">0 Completed / 0 Pending</p>
           </div>
           <div class="w-20 h-20 relative">
@@ -237,7 +179,6 @@
           
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center space-x-2">
-              <!-- Circular Time Picker Trigger Button -->
               <button onclick="openCircularTimePicker()" id="timePickerBtn" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1 shadow-sm">
                 <span>⏰</span>
                 <span id="selectedTimeDisplay">09:00 AM</span>
@@ -247,9 +188,7 @@
                 <span>Permanent</span>
               </label>
             </div>
-            <button onclick="addTask()" class="bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl hover:bg-emerald-600 transition shadow-sm">
-              Add Task
-            </button>
+            <button onclick="addTask()" class="bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl hover:bg-emerald-600 transition shadow-sm">Add Task</button>
           </div>
         </div>
 
@@ -263,85 +202,60 @@
 
       <!-- Bottom Nav Bar -->
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
-        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-emerald-500">
-          <span class="text-lg">📋</span>
-          <span class="text-[10px] font-bold">Tasks</span>
-        </button>
-        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📊</span>
-          <span class="text-[10px] font-bold">Reports</span>
-        </button>
-        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📈</span>
-          <span class="text-[10px] font-bold">Progress</span>
-        </button>
-        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">⚙️</span>
-          <span class="text-[10px] font-bold">Settings</span>
-        </button>
+        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-emerald-500"><span class="text-lg">📋</span><span class="text-[10px] font-bold">Tasks</span></button>
+        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📊</span><span class="text-[10px] font-bold">Reports</span></button>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📈</span><span class="text-[10px] font-bold">Progress</span></button>
+        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">⚙️</span><span class="text-[10px] font-bold">Settings</span></button>
       </nav>
     </div>
 
 
     <!---------------------------------------------------------
-      5. REPORTS & ANALYTICS VIEW (Multiple Chart Selectors)
+      5. REPORTS VIEW (Dynamic Multi-Chart Selector)
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
-        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity & Interaction Reports</h1>
+        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity Reports</h1>
         <button onclick="switchView('dashboard')" class="text-xs font-bold text-emerald-500">← Back</button>
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Chart Selector Tabs -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
-          <button onclick="setReportChartType('bar')" id="chartBtnBar" class="flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition">Weekly Bar</button>
+          <button onclick="setReportChartType('bar')" id="chartBtnBar" class="flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition">Bar Chart</button>
           <button onclick="setReportChartType('doughnut')" id="chartBtnDoughnut" class="flex-1 py-2 rounded-xl transition">Doughnut</button>
-          <button onclick="setReportChartType('line')" id="chartBtnLine" class="flex-1 py-2 rounded-xl transition">Progress Line</button>
+          <button onclick="setReportChartType('line')" id="chartBtnLine" class="flex-1 py-2 rounded-xl transition">Line Chart</button>
         </div>
 
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 id="reportChartTitle" class="text-xs font-extrabold text-slate-400 uppercase">Weekly Completion Analytics</h3>
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
+          <h3 id="reportChartTitle" class="text-xs font-extrabold text-slate-400 uppercase">Live Output Analytics</h3>
           <div class="h-48 relative">
             <canvas id="productivityChart"></canvas>
           </div>
         </div>
 
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
-          <h3 class="text-xs font-extrabold text-slate-400 uppercase">User Engagement & Interaction Share</h3>
-          <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Interaction Efficiency</span>
-            <span id="interactionPercent" class="text-xs font-black text-emerald-500">94.2%</span>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 p-4 rounded-2xl text-center space-y-1">
+            <p id="statCompletedTotal" class="text-xl font-black text-emerald-500">0</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase">Completed Tasks</p>
           </div>
-          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-            <div id="interactionBar" class="bg-emerald-500 h-full w-[94%] transition-all"></div>
+          <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 p-4 rounded-2xl text-center space-y-1">
+            <p id="statInteractions" class="text-xl font-black text-amber-500">0</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase">Live Clicks / Actions</p>
           </div>
         </div>
       </main>
 
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
-        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📋</span>
-          <span class="text-[10px] font-bold">Tasks</span>
-        </button>
-        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-emerald-500">
-          <span class="text-lg">📊</span>
-          <span class="text-[10px] font-bold">Reports</span>
-        </button>
-        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📈</span>
-          <span class="text-[10px] font-bold">Progress</span>
-        </button>
-        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">⚙️</span>
-          <span class="text-[10px] font-bold">Settings</span>
-        </button>
+        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📋</span><span class="text-[10px] font-bold">Tasks</span></button>
+        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-emerald-500"><span class="text-lg">📊</span><span class="text-[10px] font-bold">Reports</span></button>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📈</span><span class="text-[10px] font-bold">Progress</span></button>
+        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">⚙️</span><span class="text-[10px] font-bold">Settings</span></button>
       </nav>
     </div>
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW (Monthly Tracking & Daily Done Logs)
+      6. PROGRESS VIEW (Monthly Chart & Daily Tracking)
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -350,31 +264,26 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-5 text-center space-y-3">
-          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400">October 2026 Monthly Matrix</p>
-          <div id="monthlyProgressDisplay" class="py-4 text-xs font-bold text-slate-700 dark:text-slate-200 space-y-2">
-            Loading monthly logs...
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
+          <h3 class="text-xs font-extrabold uppercase text-slate-400">Monthly Progress Bar Chart</h3>
+          <div class="h-48 relative">
+            <canvas id="progressMonthChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
+          <h3 class="text-xs font-extrabold uppercase text-slate-400">Archived Daily Records</h3>
+          <div id="monthlyProgressDisplay" class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+            Loading archived logs...
           </div>
         </div>
       </main>
 
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
-        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📋</span>
-          <span class="text-[10px] font-bold">Tasks</span>
-        </button>
-        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📊</span>
-          <span class="text-[10px] font-bold">Reports</span>
-        </button>
-        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-emerald-500">
-          <span class="text-lg">📈</span>
-          <span class="text-[10px] font-bold">Progress</span>
-        </button>
-        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">⚙️</span>
-          <span class="text-[10px] font-bold">Settings</span>
-        </button>
+        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📋</span><span class="text-[10px] font-bold">Tasks</span></button>
+        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📊</span><span class="text-[10px] font-bold">Reports</span></button>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-emerald-500"><span class="text-lg">📈</span><span class="text-[10px] font-bold">Progress</span></button>
+        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">⚙️</span><span class="text-[10px] font-bold">Settings</span></button>
       </nav>
     </div>
 
@@ -384,47 +293,31 @@
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
-        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Settings & Customization</h1>
+        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Settings</h1>
         <button onclick="switchView('dashboard')" class="text-xs font-bold text-emerald-500">← Back</button>
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 class="text-xs font-extrabold uppercase text-slate-400">Account Information</h3>
+          <h3 class="text-xs font-extrabold uppercase text-slate-400">Account</h3>
           <p class="text-xs text-slate-600 dark:text-slate-300">Signed in as: <span id="settingsEmailDisplay" class="font-bold">user@taskmaster.app</span></p>
-          <button onclick="logout()" class="w-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white font-bold text-xs py-2.5 rounded-2xl transition">
-            Sign Out
-          </button>
+          <button onclick="logout()" class="w-full bg-rose-500/10 text-rose-500 font-bold text-xs py-2.5 rounded-2xl transition">Sign Out</button>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between">
           <div>
-            <h4 class="text-xs font-bold text-slate-900 dark:text-white">Dark Mode Appearance</h4>
-            <p class="text-[10px] text-slate-400">Complementary UI theme toggle</p>
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white">Dark Mode</h4>
+            <p class="text-[10px] text-slate-400">Toggle UI theme</p>
           </div>
-          <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-            Toggle 🌓
-          </button>
+          <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold">Toggle 🌓</button>
         </div>
       </main>
 
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
-        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📋</span>
-          <span class="text-[10px] font-bold">Tasks</span>
-        </button>
-        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📊</span>
-          <span class="text-[10px] font-bold">Reports</span>
-        </button>
-        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📈</span>
-          <span class="text-[10px] font-bold">Progress</span>
-        </button>
-        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-emerald-500">
-          <span class="text-lg">⚙️</span>
-          <span class="text-[10px] font-bold">Settings</span>
-        </button>
+        <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📋</span><span class="text-[10px] font-bold">Tasks</span></button>
+        <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📊</span><span class="text-[10px] font-bold">Reports</span></button>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📈</span><span class="text-[10px] font-bold">Progress</span></button>
+        <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-emerald-500"><span class="text-lg">⚙️</span><span class="text-[10px] font-bold">Settings</span></button>
       </nav>
     </div>
 
@@ -433,17 +326,30 @@
   <!-- CIRCULAR TIME PICKER MODAL -->
   <div id="circularTimeModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-xs space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center">
-      <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time</h3>
-      <div class="relative w-44 h-44 mx-auto bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-emerald-500/30">
-        <div id="clockHands" class="absolute text-xl font-black text-emerald-500">09:00</div>
+      <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time (Circular Clock)</h3>
+      <div class="relative w-44 h-44 mx-auto bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-emerald-500/30 shadow-inner cursor-pointer" onclick="rotateClock(event)">
+        <div id="clockHands" class="absolute text-xl font-black text-emerald-500">09:00 AM</div>
       </div>
-      <div class="flex justify-center space-x-2">
-        <button onclick="setTimeValue('08:00 AM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">08:00 AM</button>
-        <button onclick="setTimeValue('12:00 PM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">12:00 PM</button>
-        <button onclick="setTimeValue('04:00 PM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">04:00 PM</button>
+      <div class="grid grid-cols-3 gap-2">
+        <button onclick="setTimeValue('08:00 AM')" class="py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">08:00 AM</button>
+        <button onclick="setTimeValue('12:00 PM')" class="py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">12:00 PM</button>
+        <button onclick="setTimeValue('04:00 PM')" class="py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">04:00 PM</button>
       </div>
-      <button onclick="closeCircularTimePicker()" class="w-full py-2.5 bg-emerald-500 text-white font-bold text-xs rounded-2xl">Confirm Time</button>
+      <button onclick="closeCircularTimePicker()" class="w-full py-2.5 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md">Confirm Time</button>
     </div>
+  </div>
+
+  <!-- DAILY SIDEBAR DRAWER -->
+  <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
+    <div class="space-y-4 overflow-y-auto flex-1">
+      <div class="flex justify-between items-center">
+        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Daily Task Drawer & Drawer Rollover</h3>
+        <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕ Close</button>
+      </div>
+      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
+      <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
+    </div>
+    <button onclick="archiveDailyTasks()" class="w-full py-3 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md">Archive Today's Progress</button>
   </div>
 
   <!-- EDIT TASK MODAL -->
@@ -453,7 +359,7 @@
       <input id="editTaskInput" type="text" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
       <div class="flex justify-end gap-2">
         <button onclick="closeEditModal()" class="px-4 py-2 text-xs font-bold text-slate-400">Cancel</button>
-        <button onclick="saveEditedTask()" class="px-5 py-2 bg-emerald-500 text-white text-xs font-bold rounded-2xl">Save Changes</button>
+        <button onclick="saveEditedTask()" class="px-5 py-2 bg-emerald-500 text-white text-xs font-bold rounded-2xl">Save</button>
       </div>
     </div>
   </div>
@@ -466,17 +372,18 @@
     let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
-    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 15;
+    let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
+    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
     let editingTaskId = null;
     let onboardingStep = 1;
     let activeChartType = 'bar';
     let selectedTime = '09:00 AM';
     let chartInstance = null;
     let dashboardPieInstance = null;
+    let progressMonthInstance = null;
 
     function switchView(viewName) {
-      const views = ['landing', 'auth', 'onboarding', 'dashboard', 'reports', 'progress', 'settings'];
-      views.forEach(v => {
+      ['landing', 'auth', 'onboarding', 'dashboard', 'reports', 'progress', 'settings'].forEach(v => {
         const el = document.getElementById(v + 'View');
         if (el) el.classList.add('hidden');
       });
@@ -491,24 +398,15 @@
     }
 
     function startAppFlow() {
-      if (!currentUser) {
-        switchView('onboarding');
-      } else {
-        switchView('dashboard');
-        render();
-      }
+      if (!currentUser) switchView('onboarding');
+      else { switchView('dashboard'); render(); }
     }
 
     function togglePasswordVisibility() {
       const passInput = document.getElementById('authPassword');
       const eyeBtn = document.getElementById('eyeToggleBtn');
-      if (passInput.type === 'password') {
-        passInput.type = 'text';
-        eyeBtn.innerText = '🔒';
-      } else {
-        passInput.type = 'password';
-        eyeBtn.innerText = '👁️';
-      }
+      if (passInput.type === 'password') { passInput.type = 'text'; eyeBtn.innerText = '🔒'; }
+      else { passInput.type = 'password'; eyeBtn.innerText = '👁️'; }
     }
 
     function trackUserInteraction(event) {
@@ -517,13 +415,8 @@
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
     }
 
-    function openCircularTimePicker() {
-      document.getElementById('circularTimeModal').classList.remove('hidden');
-    }
-
-    function closeCircularTimePicker() {
-      document.getElementById('circularTimeModal').classList.add('hidden');
-    }
+    function openCircularTimePicker() { document.getElementById('circularTimeModal').classList.remove('hidden'); }
+    function closeCircularTimePicker() { document.getElementById('circularTimeModal').classList.add('hidden'); }
 
     function setTimeValue(timeStr) {
       selectedTime = timeStr;
@@ -532,41 +425,21 @@
       closeCircularTimePicker();
     }
 
+    function rotateClock(e) {
+      const times = ['08:00 AM', '10:00 AM', '12:00 PM', '02:00 PM', '04:00 PM', '06:00 PM', '08:00 PM'];
+      const randomTime = times[Math.floor(Math.random() * times.length)];
+      setTimeValue(randomTime);
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById('dailySidebar');
+      sb.classList.toggle('hidden');
+      renderSidebarTasks();
+    }
+
     async function sha256(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    function switchAuthMode(mode) {
-      authMode = mode;
-      const heading = document.getElementById('authHeading');
-      const sub = document.getElementById('authSubheading');
-      const btn = document.getElementById('authActionBtn');
-      const passWrapper = document.getElementById('passwordWrapper');
-      const forgotLink = document.getElementById('forgotPasswordLinkContainer');
-      const switchPrompt = document.getElementById('authSwitchPromptBtn');
-
-      forgotLink.classList.add('hidden');
-      passWrapper.classList.remove('hidden');
-
-      if (mode === 'login') {
-        heading.innerText = 'Welcome Back';
-        sub.innerText = 'Secure user credentials authentication';
-        btn.innerText = 'Sign In';
-        forgotLink.classList.remove('hidden');
-        switchPrompt.innerHTML = 'Don\'t have an account? <span class="text-emerald-500 underline">Sign Up</span>';
-      } else if (mode === 'signup') {
-        heading.innerText = 'Create Account';
-        sub.innerText = 'Join TaskMaster ecosystem';
-        btn.innerText = 'Sign Up';
-        switchPrompt.innerHTML = 'Already have an account? <span class="text-emerald-500 underline">Sign In</span>';
-      } else if (mode === 'forgot') {
-        heading.innerText = 'Reset Password';
-        sub.innerText = 'Enter your email to recover credentials';
-        btn.innerText = 'Send Reset Instructions';
-        passWrapper.classList.add('hidden');
-        switchPrompt.innerHTML = 'Remember your password? <span class="text-emerald-500 underline">Sign In</span>';
-      }
     }
 
     async function processAuth() {
@@ -575,20 +448,8 @@
       const msg = document.getElementById('authErrorMsg');
       msg.classList.add('hidden');
 
-      if (!email) {
-        msg.innerText = 'Please enter a valid email address.';
-        msg.classList.remove('hidden');
-        return;
-      }
-
-      if (authMode === 'forgot') {
-        alert('Password reset instructions simulated & sent to ' + email);
-        switchAuthMode('login');
-        return;
-      }
-
-      if (!password) {
-        msg.innerText = 'Please enter your password.';
+      if (!email || !password) {
+        msg.innerText = 'Please enter valid credentials.';
         msg.classList.remove('hidden');
         return;
       }
@@ -612,20 +473,17 @@
     }
 
     const onboardingData = [
-      { title: 'Welcome to TaskMaster', desc: 'Your personal serverless productivity suite designed for high performers and Web3 builders.', icon: '🚀' },
+      { title: 'Welcome to TaskMaster', desc: 'Your personal serverless productivity suite designed for high performers.', icon: '🚀' },
       { title: 'Permanent Daily Tasks', desc: 'Set tasks to repeat daily automatically so you never miss core routines.', icon: '🔄' },
-      { title: 'Time-Pegged Reminders', desc: 'Attach exact clock times to tasks and enable browser notifications for prompt alerts.', icon: '⏰' },
+      { title: 'Time-Pegged Reminders', desc: 'Attach exact clock times to tasks.', icon: '⏰' },
       { title: 'Productivity Analytics', desc: 'Visualize your daily, weekly, and monthly output with built-in interactive charts.', icon: '📊' },
-      { title: 'Beta Social Groups', desc: 'Invite friends over, open task collaboration groups, and sync achievements together.', icon: '👥' },
+      { title: 'Collaboration Groups', desc: 'Invite friends over and sync achievements.', icon: '👥' },
       { title: 'You Are All Set!', desc: 'Ready to master your day? Let\'s get started right now.', icon: '✨' }
     ];
 
     function nextOnboardingStep() {
       onboardingStep++;
-      if (onboardingStep > 6) {
-        completeOnboarding();
-        return;
-      }
+      if (onboardingStep > 6) { switchView('auth'); return; }
       const data = onboardingData[onboardingStep - 1];
       document.getElementById('onboardingStepIndicator').innerText = `Step ${onboardingStep} of 6`;
       document.getElementById('onboardingTitle').innerText = data.title;
@@ -633,9 +491,7 @@
       document.getElementById('onboardingIllustration').innerText = data.icon;
     }
 
-    function completeOnboarding() {
-      switchView('auth');
-    }
+    function completeOnboarding() { switchView('auth'); }
 
     function saveTasks() {
       if (currentUser) localStorage.setItem('tm_tasks_' + currentUser, JSON.stringify(tasks));
@@ -652,10 +508,12 @@
         title: input.value.trim(),
         time: selectedTime,
         done: false,
-        perm: isPerm
+        perm: isPerm,
+        date: new Date().toISOString().split('T')[0]
       });
 
-      input.value = document.getElementById('permCheck').checked = false;
+      input.value = '';
+      document.getElementById('permCheck').checked = false;
       saveTasks();
     }
 
@@ -673,10 +531,7 @@
       }
     }
 
-    function closeEditModal() {
-      document.getElementById('editModal').classList.add('hidden');
-      editingTaskId = null;
-    }
+    function closeEditModal() { document.getElementById('editModal').classList.add('hidden'); editingTaskId = null; }
 
     function saveEditedTask() {
       const newTitle = document.getElementById('editTaskInput').value.trim();
@@ -692,12 +547,33 @@
       saveTasks();
     }
 
-    function requestNotificationPermission() {
-      if (!("Notification" in window)) return;
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          new Notification("TaskMaster 🦊", { body: "Notifications are active!" });
-        }
+    function archiveDailyTasks() {
+      const today = new Date().toISOString().split('T')[0];
+      const completedCount = tasks.filter(t => t.done).length;
+      archives.push({ date: today, completed: completedCount, total: tasks.length });
+      localStorage.setItem('tm_archives_' + currentUser, JSON.stringify(archives));
+      
+      // Rollover permanent tasks, clear non-permanent
+      tasks = tasks.filter(t => t.perm).map(t => ({ ...t, done: false }));
+      saveTasks();
+      toggleSidebar();
+      alert('Today\'s progress archived successfully! Permanent tasks rolled over.');
+    }
+
+    function renderSidebarTasks() {
+      const sbList = document.getElementById('sidebarTaskList');
+      sbList.innerHTML = '';
+      if (tasks.length === 0) {
+        sbList.innerHTML = `<p class="text-xs text-slate-400">No active tasks in drawer.</p>`;
+        return;
+      }
+      tasks.forEach(t => {
+        sbList.innerHTML += `
+          <div class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 flex justify-between items-center text-xs">
+            <span class="${t.done ? 'line-through text-slate-400' : ''}">${t.title}</span>
+            ${t.perm ? '<span class="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-bold">Perm</span>' : ''}
+          </div>
+        `;
       });
     }
 
@@ -705,7 +581,7 @@
       const list = document.getElementById('taskList');
       list.innerHTML = '';
       const pendingCount = tasks.filter(t => !t.done).length;
-      document.getElementById('bannerText').innerText = `You have ${pendingCount} tasks remaining today. Keep it up!`;
+      document.getElementById('bannerText').innerText = `You have ${pendingCount} pending tasks today.`;
       document.getElementById('taskCountBadge').innerText = `${pendingCount} pending`;
 
       if (tasks.length === 0) {
@@ -749,17 +625,9 @@
         type: 'doughnut',
         data: {
           labels: ['Completed', 'Pending'],
-          datasets: [{
-            data: [completed || 0.1, pending || 0.1],
-            backgroundColor: ['#10b981', '#334155'],
-            borderWidth: 0
-          }]
+          datasets: [{ data: [completed || 0.1, pending || 0.1], backgroundColor: ['#10b981', '#334155'], borderWidth: 0 }]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } }
-        }
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
       });
     }
 
@@ -779,46 +647,60 @@
       if (!ctx) return;
       const completedCount = tasks.filter(t => t.done).length;
 
+      document.getElementById('statCompletedTotal').innerText = completedCount;
+      document.getElementById('statInteractions').innerText = interactionCount;
+
       if (chartInstance) chartInstance.destroy();
 
-      let chartConfig = {
-        type: type === 'line' ? 'line' : (type === 'doughnut' ? 'doughnut' : 'bar'),
+      chartInstance = new Chart(ctx.getContext('2d'), {
+        type: type,
         data: {
           labels: type === 'doughnut' ? ['Completed', 'Pending'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           datasets: [{
-            label: 'Task Progress',
-            data: type === 'doughnut' ? [completedCount, tasks.length - completedCount] : [3, 5, 2, 8, 6, 4, completedCount],
+            label: 'Task Metrics',
+            data: type === 'doughnut' ? [completedCount, tasks.length - completedCount] : [2, 4, 3, 7, 5, 3, completedCount],
             backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#14b8a6', '#6366f1'],
             borderRadius: 8
           }]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: type === 'doughnut' } },
-          scales: type === 'doughnut' ? {} : {
-            y: { grid: { display: false }, ticks: { font: { size: 10 } } },
-            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
-          }
-        }
-      };
-
-      chartInstance = new Chart(ctx.getContext('2d'), chartConfig);
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: type === 'doughnut' } } }
+      });
     }
 
     function renderProgressView() {
+      const ctx = document.getElementById('progressMonthChart');
       const display = document.getElementById('monthlyProgressDisplay');
-      if (!display) return;
-      display.innerHTML = `
-        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-          <span>Week 1 (Oct 1 - Oct 7)</span>
-          <span class="text-emerald-500 font-extrabold">24 Tasks Done</span>
-        </div>
-        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-          <span>Week 2 (Oct 8 - Oct 14)</span>
-          <span class="text-emerald-500 font-extrabold">${tasks.length + 12} Tasks Logged</span>
-        </div>
-      `;
+      if (!ctx || !display) return;
+
+      if (progressMonthInstance) progressMonthInstance.destroy();
+
+      progressMonthInstance = new Chart(ctx.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: archives.length ? archives.map(a => a.date) : ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+          datasets: [{
+            label: 'Completed Tasks',
+            data: archives.length ? archives.map(a => a.completed) : [5, 12, 8, tasks.filter(t => t.done).length],
+            backgroundColor: '#10b981',
+            borderRadius: 8
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      display.innerHTML = '';
+      if (archives.length === 0) {
+        display.innerHTML = `<p class="text-xs text-slate-400">No archived records yet. Use the sidebar drawer to archive today's progress.</p>`;
+        return;
+      }
+      archives.forEach(arc => {
+        display.innerHTML += `
+          <div class="bg-white dark:bg-slate-900 p-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
+            <span class="font-bold">${arc.date}</span>
+            <span class="text-emerald-500 font-extrabold">${arc.completed} / ${arc.total} Done</span>
+          </div>
+        `;
+      });
     }
 
     function toggleDarkMode() {
@@ -826,9 +708,7 @@
       localStorage.setItem('tm_dark', document.documentElement.classList.contains('dark'));
     }
 
-    if (localStorage.getItem('tm_dark') === 'true') {
-      document.documentElement.classList.add('dark');
-    }
+    if (localStorage.getItem('tm_dark') === 'true') document.documentElement.classList.add('dark');
 
     function logout() {
       localStorage.removeItem('tm_user');
