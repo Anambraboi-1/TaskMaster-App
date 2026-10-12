@@ -111,7 +111,7 @@
         </div>
 
         <div class="text-center space-y-2">
-          <button id="authSwitchPromptBtn" onclick="switchAuthMode('signup')" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-emerald-500">
+          <button id="authSwitchPromptBtn" onclick="switchAuthMode()" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-emerald-500">
             Don't have an account? <span class="text-emerald-500 underline">Sign Up</span>
           </button>
         </div>
@@ -144,14 +144,14 @@
     <!---------------------------------------------------------
       4. MAIN DASHBOARD VIEW
     ---------------------------------------------------------->
-    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event)">
+    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event, 'DASHBOARD_CLICK')">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
         <div>
           <h1 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">TaskMaster<span class="text-emerald-500">.</span></h1>
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="requestNotificationPermission()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Enable Alarm Notifications">🔔</button>
+          <button onclick="requestNotificationPermission()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Enable Alarm Bell Notifications">🔔</button>
           <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Daily Task Drawer">📅</button>
           <button onclick="switchView('settings')" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition">⚙️</button>
         </div>
@@ -169,6 +169,7 @@
           </div>
         </div>
 
+        <!-- Dashboard Status Pie Chart -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
@@ -179,6 +180,16 @@
           </div>
         </div>
 
+        <!-- GitHub-Style Contribution Grid on Dashboard -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
+            <span class="text-[10px] text-emerald-500 font-bold">Live Synced</span>
+          </div>
+          <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGridDashboard"></div>
+        </div>
+
+        <!-- Add Task Form -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
@@ -215,7 +226,7 @@
 
 
     <!---------------------------------------------------------
-      5. REPORTS VIEW (Bar, Doughnut, Line Chart Toggles)
+      5. REPORTS VIEW
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -259,7 +270,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW (GitHub Grid, Day/Week/Month/Year Scopes)
+      6. PROGRESS VIEW (Full Scopes: Day, Week, Month, Year)
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -268,7 +279,7 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Scope Selector: Day, Week, Month, Year -->
+        <!-- Full Progress Scope Switcher -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
           <button onclick="setProgressScope('day')" id="scopeBtnDay" class="flex-1 py-2 rounded-xl transition">Day</button>
           <button onclick="setProgressScope('week')" id="scopeBtnWeek" class="flex-1 py-2 rounded-xl transition">Week</button>
@@ -276,18 +287,9 @@
           <button onclick="setProgressScope('year')" id="scopeBtnYear" class="flex-1 py-2 rounded-xl transition">Year</button>
         </div>
 
-        <!-- GitHub-Style Activity / Contribution Heatmap -->
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
-            <span class="text-[10px] text-emerald-500 font-bold">Live Synced</span>
-          </div>
-          <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGrid"></div>
-        </div>
-
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 id="progressScopeTitle" class="text-xs font-extrabold uppercase text-slate-400">Monthly Progress Bar Chart</h3>
-          <div class="h-44 relative">
+          <h3 id="progressScopeTitle" class="text-xs font-extrabold uppercase text-slate-400">MONTHLY PROGRESS ANALYTICS</h3>
+          <div class="h-48 relative">
             <canvas id="progressMonthChart"></canvas>
           </div>
         </div>
@@ -310,7 +312,7 @@
 
 
     <!---------------------------------------------------------
-      7. SETTINGS VIEW (Restored Beta Invites)
+      7. SETTINGS VIEW (Beta Social Card Restored)
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -337,8 +339,8 @@
         <!-- Restored Beta Feature Card -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
           <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
-          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups (Coming in v2.0).</p>
-          <button onclick="alert('Beta referral system is active! Invite friends with your unique User ID.')" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
+          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups using your unique User ID.</p>
+          <button onclick="alert('Beta referral system is active! Your referral User ID is: ' + currentUid)" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
             Invite Friends (Beta)
           </button>
         </div>
@@ -402,7 +404,7 @@
     let currentView = 'landing';
     let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
-    let currentUid = localStorage.getItem('tm_uid') || 'UID-GUEST';
+    let currentUid = localStorage.getItem('tm_uid') || 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
     let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
     let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
@@ -427,18 +429,25 @@
 
       if (viewName === 'dashboard') {
         renderDashboardPie();
+        renderGitHubHeatmapDashboard();
         document.getElementById('userUidBadge').innerText = 'UID: ' + currentUid;
       }
       if (viewName === 'reports') renderReportsChart(activeChartType);
-      if (viewName === 'progress') {
-        renderGitHubHeatmap();
-        renderProgressView();
-      }
+      if (viewName === 'progress') renderProgressView();
+
+      trackUserInteraction(null, 'NAVIGATE_VIEW_' + viewName.toUpperCase());
     }
 
     function startAppFlow() {
       if (!currentUser) switchView('onboarding');
       else { switchView('dashboard'); render(); }
+    }
+
+    function switchAuthMode() {
+      authMode = authMode === 'login' ? 'signup' : 'login';
+      document.getElementById('authHeading').innerText = authMode === 'login' ? 'Welcome Back' : 'Create Account';
+      document.getElementById('authActionBtn').innerText = authMode === 'login' ? 'Sign In' : 'Sign Up';
+      document.getElementById('authSwitchPromptBtn').innerHTML = authMode === 'login' ? 'Don\'t have an account? <span class="text-emerald-500 underline">Sign Up</span>' : 'Already have an account? <span class="text-emerald-500 underline">Sign In</span>';
     }
 
     function togglePasswordVisibility() {
@@ -448,7 +457,7 @@
       else { passInput.type = 'password'; eyeBtn.innerText = '👁️'; }
     }
 
-    async function trackUserInteraction(event) {
+    async function trackUserInteraction(event, type) {
       if (!currentUser) return;
       interactionCount++;
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
@@ -457,7 +466,7 @@
         await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify({ action: 'log_activity', userId: currentUid, activityType: 'CLICK_INTERACTION' })
+          body: JSON.stringify({ action: 'log_activity', userId: currentUid, activityType: type || 'CLICK_INTERACTION' })
         });
       } catch (e) {}
     }
@@ -484,10 +493,13 @@
     }
 
     function requestNotificationPermission() {
-      if (!("Notification" in window)) return;
+      if (!("Notification" in window)) {
+        alert("Browser does not support desktop notifications.");
+        return;
+      }
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
-          new Notification("TaskMaster 🦊", { body: "Notifications & Alarms are active for your tasks!" });
+          new Notification("TaskMaster 🦊", { body: "Notifications & Alarms active for your tasks!" });
         }
       });
     }
@@ -525,9 +537,7 @@
           msg.classList.remove('hidden');
           return;
         }
-      } catch (e) {
-        currentUid = 'UID-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-      }
+      } catch (e) {}
 
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
@@ -564,28 +574,47 @@
       render();
     }
 
-    function addTask() {
+    async function addTask() {
       const input = document.getElementById('taskInput');
       const isPerm = document.getElementById('permCheck').checked;
       if (!input.value.trim()) return;
 
-      tasks.push({
+      const newTask = {
         id: Date.now(),
         title: input.value.trim(),
         time: selectedTime,
         done: false,
         perm: isPerm,
         date: new Date().toISOString().split('T')[0]
-      });
+      };
 
+      tasks.push(newTask);
       input.value = '';
       document.getElementById('permCheck').checked = false;
       saveTasks();
+
+      // Sync Task directly to backend Apps Script
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({
+            action: 'sync_task',
+            taskId: newTask.id,
+            userId: currentUid,
+            title: newTask.title,
+            time: newTask.time,
+            isPermanent: newTask.perm,
+            isDone: false
+          })
+        });
+      } catch (e) {}
     }
 
     function toggleTask(id) {
       tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
       saveTasks();
+      trackUserInteraction(null, 'TOGGLE_TASK');
     }
 
     function openEditModal(id) {
@@ -622,7 +651,7 @@
       tasks = tasks.filter(t => t.perm).map(t => ({ ...t, done: false }));
       saveTasks();
       toggleSidebar();
-      alert('Progress archived successfully!');
+      alert('Progress archived successfully! Permanent routines rolled over.');
     }
 
     function renderSidebarTasks() {
@@ -642,8 +671,8 @@
       });
     }
 
-    function renderGitHubHeatmap() {
-      const grid = document.getElementById('githubHeatmapGrid');
+    function renderGitHubHeatmapDashboard() {
+      const grid = document.getElementById('githubHeatmapGridDashboard');
       if (!grid) return;
       grid.innerHTML = '';
       for (let i = 0; i < 28; i++) {
@@ -771,11 +800,14 @@
       let dataVals = [5, 12, 8, tasks.filter(t => t.done).length];
 
       if (currentProgressScope === 'day') {
-        labels = ['08:00', '12:00', '16:00', '20:00'];
-        dataVals = [1, 2, 0, tasks.filter(t => t.done).length];
+        labels = ['08:00 AM', '12:00 PM', '04:00 PM', '08:00 PM'];
+        dataVals = [1, 3, 2, tasks.filter(t => t.done).length];
+      } else if (currentProgressScope === 'week') {
+        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        dataVals = [3, 5, 2, 8, 4, 6, tasks.filter(t => t.done).length];
       } else if (currentProgressScope === 'year') {
-        labels = ['Q1', 'Q2', 'Q3', 'Q4'];
-        dataVals = [45, 68, 52, tasks.filter(t => t.done).length + 30];
+        labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        dataVals = [12, 19, 15, 22, 30, 25, 28, 35, 40, 38, 42, tasks.filter(t => t.done).length + 20];
       }
 
       progressMonthInstance = new Chart(ctx.getContext('2d'), {
