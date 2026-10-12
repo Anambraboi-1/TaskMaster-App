@@ -49,7 +49,6 @@
       </header>
 
       <main class="py-6 space-y-6 z-10 text-center my-auto">
-        <!-- Mascot Illustration -->
         <div class="relative w-28 h-28 mx-auto animate-float">
           <div class="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"></div>
           <div class="relative w-full h-full bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-3xl shadow-xl flex items-center justify-center text-4xl border-4 border-white dark:border-slate-800">
@@ -72,14 +71,12 @@
           </p>
         </div>
 
-        <!-- App UI Snippets / Look & Feel Previews -->
         <div class="space-y-3 text-left">
           <div class="flex items-center justify-between px-1">
             <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">App Interface Snippets</span>
-            <span class="flex items-center space-x-1 text-[10px] text-emerald-500 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Sync Ready</span>
+            <span class="flex items-center space-x-1 text-[10px] text-emerald-500 font-bold"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Active</span>
           </div>
 
-          <!-- Snippet 1: Task Preview -->
           <div class="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-3.5 shadow-sm space-y-2">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2.5">
@@ -90,7 +87,6 @@
             </div>
           </div>
 
-          <!-- Snippet 2: Analytics & Stats Preview -->
           <div class="bg-slate-900 text-white rounded-2xl p-3.5 shadow-md flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <span class="text-lg">📊</span>
@@ -114,7 +110,7 @@
 
 
     <!---------------------------------------------------------
-      2. AUTHENTICATION VIEW (Login / Signup / Forgot Password)
+      2. AUTHENTICATION VIEW
     ---------------------------------------------------------->
     <div id="authView" class="hidden flex-1 flex flex-col justify-between p-6">
       <header class="flex justify-between items-center py-2">
@@ -133,7 +129,6 @@
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl space-y-3 shadow-sm">
           <input id="authEmail" type="email" placeholder="Email address" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
-          <!-- Password Input with Eye Toggle -->
           <div class="relative">
             <input id="authPassword" type="password" placeholder="Password" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 pr-10 text-xs focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
             <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold" id="eyeToggleBtn">
@@ -164,7 +159,7 @@
 
 
     <!---------------------------------------------------------
-      3. ONBOARDING FLOW VIEW (6 Beta Pages)
+      3. ONBOARDING FLOW VIEW
     ---------------------------------------------------------->
     <div id="onboardingView" class="hidden flex-1 flex flex-col justify-between p-6 text-center">
       <header class="flex justify-between items-center py-2">
@@ -183,15 +178,6 @@
             Your personal serverless productivity suite designed for high performers and Web3 builders.
           </p>
         </div>
-
-        <div class="flex justify-center space-x-1.5 pt-2" id="onboardingDots">
-          <span class="w-6 h-1.5 rounded-full bg-emerald-500 transition-all"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all"></span>
-        </div>
       </main>
 
       <footer>
@@ -203,7 +189,7 @@
 
 
     <!---------------------------------------------------------
-      4. MAIN DASHBOARD VIEW
+      4. MAIN DASHBOARD VIEW (With Pie Chart & Circular Time Picker)
     ---------------------------------------------------------->
     <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event)">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -222,6 +208,7 @@
       </header>
 
       <main class="p-5 pt-3 space-y-4 flex-1 overflow-y-auto pb-20">
+        <!-- Banner without sync text -->
         <div class="bg-slate-900 text-white rounded-3xl p-4 flex items-center justify-between shadow-lg relative overflow-hidden">
           <div class="absolute -right-6 -bottom-6 text-6xl opacity-10">🦊</div>
           <div class="flex items-center space-x-3 z-10">
@@ -233,12 +220,28 @@
           </div>
         </div>
 
+        <!-- Dashboard Mini Pie Chart Preview -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between">
+          <div class="space-y-1">
+            <h4 class="text-xs font-extrabold uppercase text-slate-400">Status Overview</h4>
+            <p id="dashboardStatusSub" class="text-[11px] font-bold text-slate-700 dark:text-slate-200">0 Completed / 0 Pending</p>
+          </div>
+          <div class="w-20 h-20 relative">
+            <canvas id="dashboardPieChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Add Task Input Box -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center space-x-2">
-              <input id="taskTime" type="time" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2.5 py-1.5 text-[11px] font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:border-emerald-500">
+              <!-- Circular Time Picker Trigger Button -->
+              <button onclick="openCircularTimePicker()" id="timePickerBtn" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1 shadow-sm">
+                <span>⏰</span>
+                <span id="selectedTimeDisplay">09:00 AM</span>
+              </button>
               <label class="flex items-center space-x-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-400 cursor-pointer">
                 <input id="permCheck" type="checkbox" class="accent-emerald-500 rounded">
                 <span>Permanent</span>
@@ -258,6 +261,7 @@
         <div id="taskList" class="space-y-2"></div>
       </main>
 
+      <!-- Bottom Nav Bar -->
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
         <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-emerald-500">
           <span class="text-lg">📋</span>
@@ -267,9 +271,9 @@
           <span class="text-lg">📊</span>
           <span class="text-[10px] font-bold">Reports</span>
         </button>
-        <button onclick="switchView('calendar')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📅</span>
-          <span class="text-[10px] font-bold">Calendar</span>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
+          <span class="text-lg">📈</span>
+          <span class="text-[10px] font-bold">Progress</span>
         </button>
         <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
           <span class="text-lg">⚙️</span>
@@ -280,7 +284,7 @@
 
 
     <!---------------------------------------------------------
-      5. REPORTS & ANALYTICS VIEW (Interaction Metrics & Charts)
+      5. REPORTS & ANALYTICS VIEW (Multiple Chart Selectors)
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -288,34 +292,29 @@
         <button onclick="switchView('dashboard')" class="text-xs font-bold text-emerald-500">← Back</button>
       </header>
 
-      <main class="p-5 space-y-5 flex-1 overflow-y-auto pb-20">
-        <!-- User Interaction Analytics Card -->
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
-          <h3 class="text-xs font-extrabold text-slate-400 uppercase">User Engagement & Interaction Percentage</h3>
-          <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Click & Navigation Share</span>
-            <span id="interactionPercent" class="text-xs font-black text-emerald-500">94.2%</span>
-          </div>
-          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-            <div id="interactionBar" class="bg-emerald-500 h-full w-[94%] transition-all"></div>
-          </div>
+      <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
+        <!-- Chart Selector Tabs -->
+        <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
+          <button onclick="setReportChartType('bar')" id="chartBtnBar" class="flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition">Weekly Bar</button>
+          <button onclick="setReportChartType('doughnut')" id="chartBtnDoughnut" class="flex-1 py-2 rounded-xl transition">Doughnut</button>
+          <button onclick="setReportChartType('line')" id="chartBtnLine" class="flex-1 py-2 rounded-xl transition">Progress Line</button>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 class="text-xs font-extrabold text-slate-400 uppercase">Weekly Completion Analytics</h3>
+          <h3 id="reportChartTitle" class="text-xs font-extrabold text-slate-400 uppercase">Weekly Completion Analytics</h3>
           <div class="h-48 relative">
             <canvas id="productivityChart"></canvas>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 p-4 rounded-2xl text-center space-y-1">
-            <p id="statCompletedTotal" class="text-xl font-black text-emerald-500">0</p>
-            <p class="text-[10px] font-bold text-slate-400 uppercase">Total Completed</p>
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
+          <h3 class="text-xs font-extrabold text-slate-400 uppercase">User Engagement & Interaction Share</h3>
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Interaction Efficiency</span>
+            <span id="interactionPercent" class="text-xs font-black text-emerald-500">94.2%</span>
           </div>
-          <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 p-4 rounded-2xl text-center space-y-1">
-            <p id="statInteractions" class="text-xl font-black text-amber-500">0</p>
-            <p class="text-[10px] font-bold text-slate-400 uppercase">Total Interactions</p>
+          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+            <div id="interactionBar" class="bg-emerald-500 h-full w-[94%] transition-all"></div>
           </div>
         </div>
       </main>
@@ -329,9 +328,9 @@
           <span class="text-lg">📊</span>
           <span class="text-[10px] font-bold">Reports</span>
         </button>
-        <button onclick="switchView('calendar')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📅</span>
-          <span class="text-[10px] font-bold">Calendar</span>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
+          <span class="text-lg">📈</span>
+          <span class="text-[10px] font-bold">Progress</span>
         </button>
         <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
           <span class="text-lg">⚙️</span>
@@ -342,26 +341,19 @@
 
 
     <!---------------------------------------------------------
-      6. CALENDAR VIEW (Day, Week, Month, Year Tracking)
+      6. PROGRESS VIEW (Monthly Tracking & Daily Done Logs)
     ---------------------------------------------------------->
-    <div id="calendarView" class="hidden flex-1 flex flex-col justify-between">
+    <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
-        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity Calendar</h1>
+        <h1 class="text-lg font-extrabold text-slate-900 dark:text-white">Productivity Progress</h1>
         <button onclick="switchView('dashboard')" class="text-xs font-bold text-emerald-500">← Back</button>
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
-          <button onclick="setCalScope('day')" id="scopeDay" class="flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition">Day</button>
-          <button onclick="setCalScope('week')" id="scopeWeek" class="flex-1 py-2 rounded-xl transition">Week</button>
-          <button onclick="setCalScope('month')" id="scopeMonth" class="flex-1 py-2 rounded-xl transition">Month</button>
-          <button onclick="setCalScope('year')" id="scopeYear" class="flex-1 py-2 rounded-xl transition">Year</button>
-        </div>
-
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-5 text-center space-y-3">
-          <p id="calendarScopeTitle" class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Today's Productivity Matrix</p>
-          <div id="calendarContentDisplay" class="py-6 text-sm font-bold text-slate-700 dark:text-slate-200">
-            Loading timeline data...
+          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400">October 2026 Monthly Matrix</p>
+          <div id="monthlyProgressDisplay" class="py-4 text-xs font-bold text-slate-700 dark:text-slate-200 space-y-2">
+            Loading monthly logs...
           </div>
         </div>
       </main>
@@ -375,9 +367,9 @@
           <span class="text-lg">📊</span>
           <span class="text-[10px] font-bold">Reports</span>
         </button>
-        <button onclick="switchView('calendar')" class="flex flex-col items-center space-y-1 text-emerald-500">
-          <span class="text-lg">📅</span>
-          <span class="text-[10px] font-bold">Calendar</span>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-emerald-500">
+          <span class="text-lg">📈</span>
+          <span class="text-[10px] font-bold">Progress</span>
         </button>
         <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
           <span class="text-lg">⚙️</span>
@@ -414,14 +406,6 @@
             Toggle 🌓
           </button>
         </div>
-
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
-          <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Features 🚀</h4>
-          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups (Coming soon in v2.0).</p>
-          <button onclick="alert('Beta referral system is launching soon! Share your link with friends.')" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
-            Invite Friends (Beta)
-          </button>
-        </div>
       </main>
 
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
@@ -433,9 +417,9 @@
           <span class="text-lg">📊</span>
           <span class="text-[10px] font-bold">Reports</span>
         </button>
-        <button onclick="switchView('calendar')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
-          <span class="text-lg">📅</span>
-          <span class="text-[10px] font-bold">Calendar</span>
+        <button onclick="switchView('progress')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition">
+          <span class="text-lg">📈</span>
+          <span class="text-[10px] font-bold">Progress</span>
         </button>
         <button onclick="switchView('settings')" class="flex flex-col items-center space-y-1 text-emerald-500">
           <span class="text-lg">⚙️</span>
@@ -444,6 +428,22 @@
       </nav>
     </div>
 
+  </div>
+
+  <!-- CIRCULAR TIME PICKER MODAL -->
+  <div id="circularTimeModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-xs space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center">
+      <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time</h3>
+      <div class="relative w-44 h-44 mx-auto bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-emerald-500/30">
+        <div id="clockHands" class="absolute text-xl font-black text-emerald-500">09:00</div>
+      </div>
+      <div class="flex justify-center space-x-2">
+        <button onclick="setTimeValue('08:00 AM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">08:00 AM</button>
+        <button onclick="setTimeValue('12:00 PM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">12:00 PM</button>
+        <button onclick="setTimeValue('04:00 PM')" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">04:00 PM</button>
+      </div>
+      <button onclick="closeCircularTimePicker()" class="w-full py-2.5 bg-emerald-500 text-white font-bold text-xs rounded-2xl">Confirm Time</button>
+    </div>
   </div>
 
   <!-- EDIT TASK MODAL -->
@@ -463,16 +463,19 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyABWIlBrZ380peqvz1rGD-vrHPwZskznu0YoVLuniFrlcIf2upJ6PhSq_KEatxOp9FTA/exec';
 
     let currentView = 'landing';
-    let authMode = 'login'; // 'login', 'signup', 'forgot'
+    let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
-    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
+    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 15;
     let editingTaskId = null;
     let onboardingStep = 1;
+    let activeChartType = 'bar';
+    let selectedTime = '09:00 AM';
     let chartInstance = null;
+    let dashboardPieInstance = null;
 
     function switchView(viewName) {
-      const views = ['landing', 'auth', 'onboarding', 'dashboard', 'reports', 'calendar', 'settings'];
+      const views = ['landing', 'auth', 'onboarding', 'dashboard', 'reports', 'progress', 'settings'];
       views.forEach(v => {
         const el = document.getElementById(v + 'View');
         if (el) el.classList.add('hidden');
@@ -482,8 +485,9 @@
       const target = document.getElementById(viewName + 'View');
       if (target) target.classList.remove('hidden');
 
-      if (viewName === 'reports') renderReportsChart();
-      if (viewName === 'calendar') renderCalendarView('day');
+      if (viewName === 'dashboard') renderDashboardPie();
+      if (viewName === 'reports') renderReportsChart(activeChartType);
+      if (viewName === 'progress') renderProgressView();
     }
 
     function startAppFlow() {
@@ -495,7 +499,6 @@
       }
     }
 
-    // Password Visibility Toggle
     function togglePasswordVisibility() {
       const passInput = document.getElementById('authPassword');
       const eyeBtn = document.getElementById('eyeToggleBtn');
@@ -508,11 +511,25 @@
       }
     }
 
-    // User Interaction & Click Tracking
     function trackUserInteraction(event) {
       if (!currentUser) return;
       interactionCount++;
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
+    }
+
+    function openCircularTimePicker() {
+      document.getElementById('circularTimeModal').classList.remove('hidden');
+    }
+
+    function closeCircularTimePicker() {
+      document.getElementById('circularTimeModal').classList.add('hidden');
+    }
+
+    function setTimeValue(timeStr) {
+      selectedTime = timeStr;
+      document.getElementById('selectedTimeDisplay').innerText = timeStr;
+      document.getElementById('clockHands').innerText = timeStr;
+      closeCircularTimePicker();
     }
 
     async function sha256(str) {
@@ -627,21 +644,18 @@
 
     function addTask() {
       const input = document.getElementById('taskInput');
-      const timeInput = document.getElementById('taskTime');
       const isPerm = document.getElementById('permCheck').checked;
       if (!input.value.trim()) return;
 
       tasks.push({
         id: Date.now(),
         title: input.value.trim(),
-        time: timeInput.value || '09:00',
+        time: selectedTime,
         done: false,
         perm: isPerm
       });
 
-      input.value = '';
-      timeInput.value = '';
-      document.getElementById('permCheck').checked = false;
+      input.value = document.getElementById('permCheck').checked = false;
       saveTasks();
     }
 
@@ -679,14 +693,10 @@
     }
 
     function requestNotificationPermission() {
-      if (!("Notification" in window)) {
-        alert("This browser does not support desktop notifications.");
-        return;
-      }
+      if (!("Notification" in window)) return;
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
-          alert("Notifications enabled successfully! You will receive time-pegged task alerts.");
-          new Notification("TaskMaster 🦊", { body: "Notifications are now active for your tasks." });
+          new Notification("TaskMaster 🦊", { body: "Notifications are active!" });
         }
       });
     }
@@ -700,6 +710,7 @@
 
       if (tasks.length === 0) {
         list.innerHTML = `<div class="text-center py-8 text-xs text-slate-400">No tasks created yet. Add one above!</div>`;
+        renderDashboardPie();
         return;
       }
 
@@ -722,69 +733,92 @@
         `;
         list.appendChild(item);
       });
+      renderDashboardPie();
     }
 
-    function renderReportsChart() {
-      const ctx = document.getElementById('productivityChart').getContext('2d');
-      const completedCount = tasks.filter(t => t.done).length;
-      document.getElementById('statCompletedTotal').innerText = completedCount;
-      document.getElementById('statInteractions').innerText = interactionCount;
+    function renderDashboardPie() {
+      const ctx = document.getElementById('dashboardPieChart');
+      if (!ctx) return;
+      const completed = tasks.filter(t => t.done).length;
+      const pending = tasks.filter(t => !t.done).length;
+      document.getElementById('dashboardStatusSub').innerText = `${completed} Completed / ${pending} Pending`;
 
-      // Calculate dynamic interaction ratio percentage
-      const interactionRatio = Math.min(99, Math.max(75, 80 + Math.floor(interactionCount / 5)));
-      document.getElementById('interactionPercent').innerText = interactionRatio + '%';
-      document.getElementById('interactionBar').style.width = interactionRatio + '%';
+      if (dashboardPieInstance) dashboardPieInstance.destroy();
+
+      dashboardPieInstance = new Chart(ctx.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed', 'Pending'],
+          datasets: [{
+            data: [completed || 0.1, pending || 0.1],
+            backgroundColor: ['#10b981', '#334155'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function setReportChartType(type) {
+      activeChartType = type;
+      ['bar', 'doughnut', 'line'].forEach(t => {
+        const btn = document.getElementById('chartBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.className = 'flex-1 py-2 rounded-xl transition text-xs font-bold';
+      });
+      const activeBtn = document.getElementById('chartBtn' + type.charAt(0).toUpperCase() + type.slice(1));
+      if (activeBtn) activeBtn.className = 'flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition';
+      renderReportsChart(type);
+    }
+
+    function renderReportsChart(type) {
+      const ctx = document.getElementById('productivityChart');
+      if (!ctx) return;
+      const completedCount = tasks.filter(t => t.done).length;
 
       if (chartInstance) chartInstance.destroy();
 
-      chartInstance = new Chart(ctx, {
-        type: 'bar',
+      let chartConfig = {
+        type: type === 'line' ? 'line' : (type === 'doughnut' ? 'doughnut' : 'bar'),
         data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          labels: type === 'doughnut' ? ['Completed', 'Pending'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           datasets: [{
-            label: 'Tasks Completed',
-            data: [3, 5, 2, 8, 6, 4, completedCount],
-            backgroundColor: '#10b981',
+            label: 'Task Progress',
+            data: type === 'doughnut' ? [completedCount, tasks.length - completedCount] : [3, 5, 2, 8, 6, 4, completedCount],
+            backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#14b8a6', '#6366f1'],
             borderRadius: 8
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
+          plugins: { legend: { display: type === 'doughnut' } },
+          scales: type === 'doughnut' ? {} : {
             y: { grid: { display: false }, ticks: { font: { size: 10 } } },
             x: { grid: { display: false }, ticks: { font: { size: 10 } } }
           }
         }
-      });
+      };
+
+      chartInstance = new Chart(ctx.getContext('2d'), chartConfig);
     }
 
-    function setCalScope(scope) {
-      ['Day', 'Week', 'Month', 'Year'].forEach(s => {
-        const btn = document.getElementById('scope' + s);
-        btn.className = 'flex-1 py-2 rounded-xl transition text-xs font-bold';
-        if (s.toLowerCase() === scope) {
-          btn.className += ' bg-white dark:bg-slate-900 text-emerald-500 shadow-sm';
-        }
-      });
-      renderCalendarView(scope);
-    }
-
-    function renderCalendarView(scope) {
-      const display = document.getElementById('calendarContentDisplay');
-      const title = document.getElementById('calendarScopeTitle');
-      title.innerText = `${scope.toUpperCase()} Productivity Matrix`;
-
-      if (scope === 'day') {
-        display.innerHTML = `<p class="text-emerald-500 font-bold">Today: Active Tracking</p><p class="text-xs text-slate-400 mt-1">${tasks.length} tasks scheduled for today.</p>`;
-      } else if (scope === 'week') {
-        display.innerHTML = `<p class="text-emerald-500 font-bold">This Week Matrix</p><p class="text-xs text-slate-400 mt-1">Consistency score: 88% on target.</p>`;
-      } else if (scope === 'month') {
-        display.innerHTML = `<p class="text-emerald-500 font-bold">October 2026 Overview</p><p class="text-xs text-slate-400 mt-1">24 active days logged successfully.</p>`;
-      } else if (scope === 'year') {
-        display.innerHTML = `<p class="text-emerald-500 font-bold">Annual 2026 Summary</p><p class="text-xs text-slate-400 mt-1">Ecosystem status: Tier-1 Productivity Master.</p>`;
-      }
+    function renderProgressView() {
+      const display = document.getElementById('monthlyProgressDisplay');
+      if (!display) return;
+      display.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center">
+          <span>Week 1 (Oct 1 - Oct 7)</span>
+          <span class="text-emerald-500 font-extrabold">24 Tasks Done</span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center">
+          <span>Week 2 (Oct 8 - Oct 14)</span>
+          <span class="text-emerald-500 font-extrabold">${tasks.length + 12} Tasks Logged</span>
+        </div>
+      `;
     }
 
     function toggleDarkMode() {
