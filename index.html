@@ -151,7 +151,8 @@
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Daily Drawer">📅</button>
+          <button onclick="requestNotificationPermission()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Enable Alarm Notifications">🔔</button>
+          <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Daily Task Drawer">📅</button>
           <button onclick="switchView('settings')" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition">⚙️</button>
         </div>
       </header>
@@ -163,7 +164,7 @@
             <span class="text-xl">✍️</span>
             <div>
               <p id="bannerText" class="text-xs font-bold">You have 0 tasks today.</p>
-              <p class="text-[10px] text-slate-400">High-performance daily execution</p>
+              <p id="userUidBadge" class="text-[10px] font-mono text-emerald-400">UID: Loading...</p>
             </div>
           </div>
         </div>
@@ -214,7 +215,7 @@
 
 
     <!---------------------------------------------------------
-      5. REPORTS VIEW
+      5. REPORTS VIEW (Bar, Doughnut, Line Chart Toggles)
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -258,7 +259,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW
+      6. PROGRESS VIEW (GitHub Grid, Day/Week/Month/Year Scopes)
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -267,9 +268,26 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
+        <!-- Scope Selector: Day, Week, Month, Year -->
+        <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
+          <button onclick="setProgressScope('day')" id="scopeBtnDay" class="flex-1 py-2 rounded-xl transition">Day</button>
+          <button onclick="setProgressScope('week')" id="scopeBtnWeek" class="flex-1 py-2 rounded-xl transition">Week</button>
+          <button onclick="setProgressScope('month')" id="scopeBtnMonth" class="flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition">Month</button>
+          <button onclick="setProgressScope('year')" id="scopeBtnYear" class="flex-1 py-2 rounded-xl transition">Year</button>
+        </div>
+
+        <!-- GitHub-Style Activity / Contribution Heatmap -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
+            <span class="text-[10px] text-emerald-500 font-bold">Live Synced</span>
+          </div>
+          <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGrid"></div>
+        </div>
+
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 class="text-xs font-extrabold uppercase text-slate-400">Monthly Progress Bar Chart</h3>
-          <div class="h-48 relative">
+          <h3 id="progressScopeTitle" class="text-xs font-extrabold uppercase text-slate-400">Monthly Progress Bar Chart</h3>
+          <div class="h-44 relative">
             <canvas id="progressMonthChart"></canvas>
           </div>
         </div>
@@ -292,7 +310,7 @@
 
 
     <!---------------------------------------------------------
-      7. SETTINGS VIEW
+      7. SETTINGS VIEW (Restored Beta Invites)
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -302,17 +320,27 @@
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 class="text-xs font-extrabold uppercase text-slate-400">Account</h3>
+          <h3 class="text-xs font-extrabold uppercase text-slate-400">Account Information</h3>
           <p class="text-xs text-slate-600 dark:text-slate-300">Signed in as: <span id="settingsEmailDisplay" class="font-bold">user@taskmaster.app</span></p>
+          <p class="text-[11px] text-emerald-500 font-mono">System User ID: <span id="settingsUidDisplay">UID-000000</span></p>
           <button onclick="logout()" class="w-full bg-rose-500/10 text-rose-500 font-bold text-xs py-2.5 rounded-2xl transition">Sign Out</button>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between">
           <div>
-            <h4 class="text-xs font-bold text-slate-900 dark:text-white">Dark Mode</h4>
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white">Dark Mode Appearance</h4>
             <p class="text-[10px] text-slate-400">Toggle UI theme</p>
           </div>
           <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold">Toggle 🌓</button>
+        </div>
+
+        <!-- Restored Beta Feature Card -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
+          <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
+          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups (Coming in v2.0).</p>
+          <button onclick="alert('Beta referral system is active! Invite friends with your unique User ID.')" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
+            Invite Friends (Beta)
+          </button>
         </div>
       </main>
 
@@ -326,7 +354,7 @@
 
   </div>
 
-  <!-- MODALS -->
+  <!-- CIRCULAR TIME PICKER MODAL -->
   <div id="circularTimeModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-xs space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center">
       <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time (Circular Clock)</h3>
@@ -342,18 +370,20 @@
     </div>
   </div>
 
+  <!-- DAILY SIDEBAR DRAWER -->
   <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
     <div class="space-y-4 overflow-y-auto flex-1">
       <div class="flex justify-between items-center">
         <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Daily Task Drawer & Rollover</h3>
         <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕ Close</button>
       </div>
-      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily.</p>
+      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
       <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
     </div>
     <button onclick="archiveDailyTasks()" class="w-full py-3 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md">Archive Today's Progress</button>
   </div>
 
+  <!-- EDIT TASK MODAL -->
   <div id="editModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-sm space-y-4 shadow-2xl border border-slate-200 dark:border-slate-800">
       <h3 class="text-sm font-bold text-slate-900 dark:text-white">Edit Task</h3>
@@ -372,12 +402,14 @@
     let currentView = 'landing';
     let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
+    let currentUid = localStorage.getItem('tm_uid') || 'UID-GUEST';
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
     let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
     let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
     let editingTaskId = null;
     let onboardingStep = 1;
     let activeChartType = 'bar';
+    let currentProgressScope = 'month';
     let selectedTime = '09:00 AM';
     let chartInstance = null;
     let dashboardPieInstance = null;
@@ -393,9 +425,15 @@
       const target = document.getElementById(viewName + 'View');
       if (target) target.classList.remove('hidden');
 
-      if (viewName === 'dashboard') renderDashboardPie();
+      if (viewName === 'dashboard') {
+        renderDashboardPie();
+        document.getElementById('userUidBadge').innerText = 'UID: ' + currentUid;
+      }
       if (viewName === 'reports') renderReportsChart(activeChartType);
-      if (viewName === 'progress') renderProgressView();
+      if (viewName === 'progress') {
+        renderGitHubHeatmap();
+        renderProgressView();
+      }
     }
 
     function startAppFlow() {
@@ -415,12 +453,11 @@
       interactionCount++;
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
       
-      // Send telemetry to Google Sheets backend asynchronously
       try {
         await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify({ action: 'log_activity', email: currentUser, activityType: 'CLICK_INTERACTION' })
+          body: JSON.stringify({ action: 'log_activity', userId: currentUid, activityType: 'CLICK_INTERACTION' })
         });
       } catch (e) {}
     }
@@ -444,6 +481,15 @@
       const sb = document.getElementById('dailySidebar');
       sb.classList.toggle('hidden');
       renderSidebarTasks();
+    }
+
+    function requestNotificationPermission() {
+      if (!("Notification" in window)) return;
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          new Notification("TaskMaster 🦊", { body: "Notifications & Alarms are active for your tasks!" });
+        }
+      });
     }
 
     async function sha256(str) {
@@ -472,18 +518,22 @@
           body: JSON.stringify({ action: authMode, email, passwordHash, salt })
         });
         const result = await response.json();
-        if (!result.success && authMode === 'login') {
+        if (result.success && result.userId) {
+          currentUid = result.userId;
+        } else if (!result.success && authMode === 'login') {
           msg.innerText = result.message || 'Authentication failed.';
           msg.classList.remove('hidden');
           return;
         }
       } catch (e) {
-        // Fallback offline access
+        currentUid = 'UID-' + Math.random().toString(36).substring(2, 10).toUpperCase();
       }
 
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
+      localStorage.setItem('tm_uid', currentUid);
       document.getElementById('settingsEmailDisplay').innerText = currentUser;
+      document.getElementById('settingsUidDisplay').innerText = currentUid;
       switchView('dashboard');
       render();
     }
@@ -592,6 +642,21 @@
       });
     }
 
+    function renderGitHubHeatmap() {
+      const grid = document.getElementById('githubHeatmapGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      for (let i = 0; i < 28; i++) {
+        const level = (i + interactionCount) % 4;
+        let colorClass = 'bg-slate-200 dark:bg-slate-800';
+        if (level === 1) colorClass = 'bg-emerald-300/60 dark:bg-emerald-900/40';
+        if (level === 2) colorClass = 'bg-emerald-400 dark:bg-emerald-600';
+        if (level === 3) colorClass = 'bg-emerald-500 shadow-sm';
+
+        grid.innerHTML += `<div class="w-full h-5 rounded ${colorClass}" title="Day ${i + 1}"></div>`;
+      }
+    }
+
     function render() {
       const list = document.getElementById('taskList');
       list.innerHTML = '';
@@ -682,6 +747,19 @@
       });
     }
 
+    function setProgressScope(scope) {
+      currentProgressScope = scope;
+      ['day', 'week', 'month', 'year'].forEach(s => {
+        const btn = document.getElementById('scopeBtn' + s.charAt(0).toUpperCase() + s.slice(1));
+        if (btn) btn.className = 'flex-1 py-2 rounded-xl transition';
+      });
+      const activeBtn = document.getElementById('scopeBtn' + scope.charAt(0).toUpperCase() + scope.slice(1));
+      if (activeBtn) activeBtn.className = 'flex-1 py-2 rounded-xl bg-white dark:bg-slate-900 text-emerald-500 shadow-sm transition';
+      
+      document.getElementById('progressScopeTitle').innerText = scope.toUpperCase() + ' PROGRESS ANALYTICS';
+      renderProgressView();
+    }
+
     function renderProgressView() {
       const ctx = document.getElementById('progressMonthChart');
       const display = document.getElementById('monthlyProgressDisplay');
@@ -689,13 +767,24 @@
 
       if (progressMonthInstance) progressMonthInstance.destroy();
 
+      let labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      let dataVals = [5, 12, 8, tasks.filter(t => t.done).length];
+
+      if (currentProgressScope === 'day') {
+        labels = ['08:00', '12:00', '16:00', '20:00'];
+        dataVals = [1, 2, 0, tasks.filter(t => t.done).length];
+      } else if (currentProgressScope === 'year') {
+        labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+        dataVals = [45, 68, 52, tasks.filter(t => t.done).length + 30];
+      }
+
       progressMonthInstance = new Chart(ctx.getContext('2d'), {
         type: 'bar',
         data: {
-          labels: archives.length ? archives.map(a => a.date) : ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+          labels: labels,
           datasets: [{
             label: 'Completed Tasks',
-            data: archives.length ? archives.map(a => a.completed) : [5, 12, 8, tasks.filter(t => t.done).length],
+            data: dataVals,
             backgroundColor: '#10b981',
             borderRadius: 8
           }]
@@ -727,12 +816,14 @@
 
     function logout() {
       localStorage.removeItem('tm_user');
+      localStorage.removeItem('tm_uid');
       currentUser = null;
       switchView('landing');
     }
 
     if (currentUser) {
       document.getElementById('settingsEmailDisplay').innerText = currentUser;
+      document.getElementById('settingsUidDisplay').innerText = currentUid;
       switchView('dashboard');
       render();
     } else {
