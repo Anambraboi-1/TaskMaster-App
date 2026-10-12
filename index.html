@@ -142,16 +142,16 @@
 
 
     <!---------------------------------------------------------
-      4. MAIN DASHBOARD VIEW
+      4. CLEAN MAIN DASHBOARD VIEW
     ---------------------------------------------------------->
-    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between" onclick="trackUserInteraction(event, 'DASHBOARD_CLICK')">
+    <div id="dashboardView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
         <div>
           <h1 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">TaskMaster<span class="text-emerald-500">.</span></h1>
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
         
-        <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-500 hover:text-white transition" title="Open Main Menu">
+        <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-500 hover:text-white transition" title="Open Main Drawer">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </header>
@@ -168,6 +168,7 @@
           </div>
         </div>
 
+        <!-- Live Status Overview -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
@@ -178,14 +179,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
-            <span class="text-[10px] text-emerald-500 font-bold">Live Synced</span>
-          </div>
-          <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGridDashboard"></div>
-        </div>
-
+        <!-- Task Input Card -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
@@ -266,7 +260,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW
+      6. PROGRESS VIEW (Contains Compact Heatmap & Multi-Charts)
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -275,6 +269,16 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
+        <!-- Compact GitHub Heatmap Grid -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-3 space-y-2 shadow-sm">
+          <div class="flex justify-between items-center">
+            <h3 class="text-[11px] font-extrabold uppercase text-slate-400">Activity Heatmap</h3>
+            <span class="text-[9px] text-emerald-500 font-bold">Live Grid</span>
+          </div>
+          <div class="grid grid-cols-14 gap-1 p-1.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800" id="compactHeatmapGrid"></div>
+        </div>
+
+        <!-- Scope Controls -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
           <button onclick="setProgressScope('day')" id="scopeBtnDay" class="flex-1 py-2 rounded-xl transition">Day</button>
           <button onclick="setProgressScope('week')" id="scopeBtnWeek" class="flex-1 py-2 rounded-xl transition">Week</button>
@@ -284,13 +288,13 @@
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
           <h3 id="progressScopeTitle" class="text-xs font-extrabold uppercase text-slate-400">MONTHLY PROGRESS ANALYTICS</h3>
-          <div class="h-48 relative">
+          <div class="h-44 relative">
             <canvas id="progressMonthChart"></canvas>
           </div>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
-          <h3 class="text-xs font-extrabold uppercase text-slate-400">Archived Daily Records</h3>
+          <h3 class="text-xs font-extrabold uppercase text-slate-400">Archived Task Log</h3>
           <div id="monthlyProgressDisplay" class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
             Loading archived logs...
           </div>
@@ -334,7 +338,7 @@
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
           <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
           <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups using your unique User ID.</p>
-          <button onclick="alert('Beta referral system is active! Your referral User ID is: ' + currentUid)" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
+          <button onclick="alert('Beta referral system active! Referral User ID: ' + currentUid)" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
             Invite Friends (Beta)
           </button>
         </div>
@@ -366,7 +370,7 @@
     </div>
   </div>
 
-  <!-- STANDARDIZED SIDE MENU DRAWER (☰) -->
+  <!-- STANDARDIZED SIDE MENU DRAWER (☰) WITH VISIBLE TASK HISTORY -->
   <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
     <div class="space-y-4 overflow-y-auto flex-1">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-800">
@@ -386,8 +390,8 @@
       </button>
 
       <div class="space-y-2 pt-2">
-        <h4 class="text-xs font-extrabold uppercase text-slate-400">Daily Task Drawer & Rollover</h4>
-        <p class="text-[11px] text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
+        <h4 class="text-xs font-extrabold uppercase text-slate-400">Daily Task Drawer & History</h4>
+        <p class="text-[11px] text-slate-500">View tasks created and executed during this session:</p>
         <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
       </div>
     </div>
@@ -419,7 +423,7 @@
     let currentUid = localStorage.getItem('tm_uid') || 'UID-GUEST';
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
     let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
-    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
+    let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 0;
     let editingTaskId = null;
     let onboardingStep = 1;
     let activeChartType = 'bar';
@@ -439,14 +443,14 @@
       const target = document.getElementById(viewName + 'View');
       if (target) target.classList.remove('hidden');
 
-      if (viewName === 'dashboard') {
-        renderDashboardPie();
-        renderGitHubHeatmapDashboard();
-      }
+      if (viewName === 'dashboard') renderDashboardPie();
       if (viewName === 'reports') renderReportsChart(activeChartType);
-      if (viewName === 'progress') renderProgressView();
+      if (viewName === 'progress') {
+        renderCompactHeatmap();
+        renderProgressView();
+      }
 
-      trackUserInteraction(null, 'NAVIGATE_VIEW_' + viewName.toUpperCase());
+      logActivity('NAVIGATE_VIEW_' + viewName.toUpperCase());
     }
 
     function startAppFlow() {
@@ -468,7 +472,7 @@
       else { passInput.type = 'password'; eyeBtn.innerText = '👁️'; }
     }
 
-    async function trackUserInteraction(event, type) {
+    async function logActivity(type, details) {
       if (!currentUser) return;
       interactionCount++;
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
@@ -477,7 +481,7 @@
         await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify({ action: 'log_activity', userId: currentUid, activityType: type || 'CLICK_INTERACTION' })
+          body: JSON.stringify({ action: 'log_activity', userId: currentUid, activityType: type || 'ACTION', details: details || '' })
         });
       } catch (e) {}
     }
@@ -607,6 +611,7 @@
       input.value = '';
       document.getElementById('permCheck').checked = false;
       saveTasks();
+      logActivity('CREATE_TASK', newTask.title);
 
       try {
         await fetch(SCRIPT_URL, {
@@ -628,7 +633,7 @@
     function toggleTask(id) {
       tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
       saveTasks();
-      trackUserInteraction(null, 'TOGGLE_TASK');
+      logActivity('TOGGLE_TASK');
     }
 
     function openEditModal(id) {
@@ -679,14 +684,14 @@
         sbList.innerHTML += `
           <div class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 flex justify-between items-center text-xs">
             <span class="${t.done ? 'line-through text-slate-400' : ''}">${t.title}</span>
-            ${t.perm ? '<span class="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-bold">Perm</span>' : ''}
+            <span class="text-[9px] font-bold ${t.done ? 'text-emerald-500' : 'text-amber-500'}">${t.done ? 'Done' : 'Pending'}</span>
           </div>
         `;
       });
     }
 
-    function renderGitHubHeatmapDashboard() {
-      const grid = document.getElementById('githubHeatmapGridDashboard');
+    function renderCompactHeatmap() {
+      const grid = document.getElementById('compactHeatmapGrid');
       if (!grid) return;
       grid.innerHTML = '';
       for (let i = 0; i < 28; i++) {
@@ -696,7 +701,7 @@
         if (level === 2) colorClass = 'bg-emerald-400 dark:bg-emerald-600';
         if (level === 3) colorClass = 'bg-emerald-500 shadow-sm';
 
-        grid.innerHTML += `<div class="w-full h-5 rounded ${colorClass}" title="Day ${i + 1}"></div>`;
+        grid.innerHTML += `<div class="w-full h-3.5 rounded ${colorClass}" title="Day ${i + 1}"></div>`;
       }
     }
 
@@ -839,15 +844,16 @@
       });
 
       display.innerHTML = '';
-      if (archives.length === 0) {
-        display.innerHTML = `<p class="text-xs text-slate-400">No archived records yet. Use the sidebar drawer to archive today's progress.</p>`;
+      if (tasks.length === 0 && archives.length === 0) {
+        display.innerHTML = `<p class="text-xs text-slate-400">No task records found.</p>`;
         return;
       }
-      archives.forEach(arc => {
+      
+      tasks.forEach(t => {
         display.innerHTML += `
           <div class="bg-white dark:bg-slate-900 p-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
-            <span class="font-bold">${arc.date}</span>
-            <span class="text-emerald-500 font-extrabold">${arc.completed} / ${arc.total} Done</span>
+            <span class="font-bold">${t.title} (${t.time})</span>
+            <span class="${t.done ? 'text-emerald-500 font-extrabold' : 'text-amber-500 font-bold'}">${t.done ? 'Completed' : 'Pending'}</span>
           </div>
         `;
       });
