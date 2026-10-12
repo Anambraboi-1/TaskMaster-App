@@ -151,14 +151,12 @@
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
         
-        <!-- Standard Industry 3-Bar Hamburger Menu Button -->
         <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-500 hover:text-white transition" title="Open Main Menu">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </header>
 
       <main class="p-5 pt-3 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Clean Banner without raw UID badge -->
         <div class="bg-slate-900 text-white rounded-3xl p-4 flex items-center justify-between shadow-lg relative overflow-hidden">
           <div class="absolute -right-6 -bottom-6 text-6xl opacity-10">🦊</div>
           <div class="flex items-center space-x-3 z-10">
@@ -170,7 +168,6 @@
           </div>
         </div>
 
-        <!-- Live Status Overview -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
@@ -181,7 +178,6 @@
           </div>
         </div>
 
-        <!-- GitHub Activity Heatmap -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <div class="flex justify-between items-center">
             <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
@@ -190,7 +186,6 @@
           <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGridDashboard"></div>
         </div>
 
-        <!-- Task Input Box -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
@@ -382,7 +377,6 @@
         <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕</button>
       </div>
 
-      <!-- Quick Action: Notifications -->
       <button onclick="requestNotificationPermission()" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500 hover:text-white p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition">
         <div class="flex items-center space-x-2">
           <span>🔔</span>
@@ -422,7 +416,7 @@
     let currentView = 'landing';
     let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
-    let currentUid = localStorage.getItem('tm_uid') || 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    let currentUid = localStorage.getItem('tm_uid') || 'UID-GUEST';
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
     let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
     let interactionCount = parseInt(localStorage.getItem('tm_interactions_' + currentUser)) || 12;
@@ -553,8 +547,12 @@
           msg.innerText = result.message || 'Authentication failed.';
           msg.classList.remove('hidden');
           return;
+        } else {
+          currentUid = 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
         }
-      } catch (e) {}
+      } catch (e) {
+        currentUid = 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      }
 
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
