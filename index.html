@@ -59,13 +59,13 @@
 
         <div class="space-y-2">
           <span class="inline-block text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full">
-            Serverless Ecosystem
+            Google Sheets Synchronized
           </span>
           <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
             Supercharge Daily Workflow & Analytics
           </h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
-            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and stay synced seamlessly.
+            Manage permanent tasks, track time-pegged reminders, analyze productivity charts, and sync seamlessly.
           </p>
         </div>
       </main>
@@ -93,7 +93,7 @@
         <div class="text-center space-y-1">
           <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3">🦊</div>
           <h2 id="authHeading" class="text-xl font-extrabold text-slate-900 dark:text-white">Welcome Back</h2>
-          <p id="authSubheading" class="text-xs text-slate-400">Secure user credentials authentication</p>
+          <p id="authSubheading" class="text-xs text-slate-400">Google Sheets Database Authentication</p>
         </div>
 
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-5 rounded-3xl space-y-3 shadow-sm">
@@ -108,6 +108,12 @@
             Sign In
           </button>
           <p id="authErrorMsg" class="text-[11px] text-center font-medium text-rose-500 hidden"></p>
+        </div>
+
+        <div class="text-center space-y-2">
+          <button id="authSwitchPromptBtn" onclick="switchAuthMode('signup')" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-emerald-500">
+            Don't have an account? <span class="text-emerald-500 underline">Sign Up</span>
+          </button>
         </div>
       </main>
       <footer></footer>
@@ -162,7 +168,6 @@
           </div>
         </div>
 
-        <!-- Dashboard Live Pie Chart & Stats -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
@@ -173,7 +178,6 @@
           </div>
         </div>
 
-        <!-- Add Task Input Box -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
@@ -200,7 +204,6 @@
         <div id="taskList" class="space-y-2"></div>
       </main>
 
-      <!-- Bottom Nav Bar -->
       <nav class="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-20">
         <button onclick="switchView('dashboard')" class="flex flex-col items-center space-y-1 text-emerald-500"><span class="text-lg">📋</span><span class="text-[10px] font-bold">Tasks</span></button>
         <button onclick="switchView('reports')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-emerald-500 transition"><span class="text-lg">📊</span><span class="text-[10px] font-bold">Reports</span></button>
@@ -211,7 +214,7 @@
 
 
     <!---------------------------------------------------------
-      5. REPORTS VIEW (Dynamic Multi-Chart Selector)
+      5. REPORTS VIEW
     ---------------------------------------------------------->
     <div id="reportsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -255,7 +258,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW (Monthly Chart & Daily Tracking)
+      6. PROGRESS VIEW
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -323,7 +326,7 @@
 
   </div>
 
-  <!-- CIRCULAR TIME PICKER MODAL -->
+  <!-- MODALS -->
   <div id="circularTimeModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-xs space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center">
       <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time (Circular Clock)</h3>
@@ -339,20 +342,18 @@
     </div>
   </div>
 
-  <!-- DAILY SIDEBAR DRAWER -->
   <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
     <div class="space-y-4 overflow-y-auto flex-1">
       <div class="flex justify-between items-center">
-        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Daily Task Drawer & Drawer Rollover</h3>
+        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Daily Task Drawer & Rollover</h3>
         <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕ Close</button>
       </div>
-      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
+      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily.</p>
       <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
     </div>
     <button onclick="archiveDailyTasks()" class="w-full py-3 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md">Archive Today's Progress</button>
   </div>
 
-  <!-- EDIT TASK MODAL -->
   <div id="editModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-sm space-y-4 shadow-2xl border border-slate-200 dark:border-slate-800">
       <h3 class="text-sm font-bold text-slate-900 dark:text-white">Edit Task</h3>
@@ -409,10 +410,19 @@
       else { passInput.type = 'password'; eyeBtn.innerText = '👁️'; }
     }
 
-    function trackUserInteraction(event) {
+    async function trackUserInteraction(event) {
       if (!currentUser) return;
       interactionCount++;
       localStorage.setItem('tm_interactions_' + currentUser, interactionCount);
+      
+      // Send telemetry to Google Sheets backend asynchronously
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({ action: 'log_activity', email: currentUser, activityType: 'CLICK_INTERACTION' })
+        });
+      } catch (e) {}
     }
 
     function openCircularTimePicker() { document.getElementById('circularTimeModal').classList.remove('hidden'); }
@@ -427,8 +437,7 @@
 
     function rotateClock(e) {
       const times = ['08:00 AM', '10:00 AM', '12:00 PM', '02:00 PM', '04:00 PM', '06:00 PM', '08:00 PM'];
-      const randomTime = times[Math.floor(Math.random() * times.length)];
-      setTimeValue(randomTime);
+      setTimeValue(times[Math.floor(Math.random() * times.length)]);
     }
 
     function toggleSidebar() {
@@ -458,12 +467,19 @@
       const passwordHash = await sha256(password + salt);
 
       try {
-        await fetch(SCRIPT_URL, {
+        const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors',
           body: JSON.stringify({ action: authMode, email, passwordHash, salt })
         });
-      } catch (e) {}
+        const result = await response.json();
+        if (!result.success && authMode === 'login') {
+          msg.innerText = result.message || 'Authentication failed.';
+          msg.classList.remove('hidden');
+          return;
+        }
+      } catch (e) {
+        // Fallback offline access
+      }
 
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
@@ -473,12 +489,12 @@
     }
 
     const onboardingData = [
-      { title: 'Welcome to TaskMaster', desc: 'Your personal serverless productivity suite designed for high performers.', icon: '🚀' },
-      { title: 'Permanent Daily Tasks', desc: 'Set tasks to repeat daily automatically so you never miss core routines.', icon: '🔄' },
+      { title: 'Welcome to TaskMaster', desc: 'Your personal serverless productivity suite.', icon: '🚀' },
+      { title: 'Permanent Daily Tasks', desc: 'Set tasks to repeat daily automatically.', icon: '🔄' },
       { title: 'Time-Pegged Reminders', desc: 'Attach exact clock times to tasks.', icon: '⏰' },
-      { title: 'Productivity Analytics', desc: 'Visualize your daily, weekly, and monthly output with built-in interactive charts.', icon: '📊' },
-      { title: 'Collaboration Groups', desc: 'Invite friends over and sync achievements.', icon: '👥' },
-      { title: 'You Are All Set!', desc: 'Ready to master your day? Let\'s get started right now.', icon: '✨' }
+      { title: 'Productivity Analytics', desc: 'Visualize your daily output with charts.', icon: '📊' },
+      { title: 'Collaboration Groups', desc: 'Sync achievements together.', icon: '👥' },
+      { title: 'You Are All Set!', desc: 'Ready to master your day.', icon: '✨' }
     ];
 
     function nextOnboardingStep() {
@@ -553,11 +569,10 @@
       archives.push({ date: today, completed: completedCount, total: tasks.length });
       localStorage.setItem('tm_archives_' + currentUser, JSON.stringify(archives));
       
-      // Rollover permanent tasks, clear non-permanent
       tasks = tasks.filter(t => t.perm).map(t => ({ ...t, done: false }));
       saveTasks();
       toggleSidebar();
-      alert('Today\'s progress archived successfully! Permanent tasks rolled over.');
+      alert('Progress archived successfully!');
     }
 
     function renderSidebarTasks() {
