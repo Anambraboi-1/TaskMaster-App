@@ -150,26 +150,27 @@
           <h1 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">TaskMaster<span class="text-emerald-500">.</span></h1>
           <p id="userGreeting" class="text-[11px] font-semibold text-slate-400">Welcome back!</p>
         </div>
-        <div class="flex items-center space-x-2">
-          <button onclick="requestNotificationPermission()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Enable Alarm Bell Notifications">🔔</button>
-          <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition" title="Daily Task Drawer">📅</button>
-          <button onclick="switchView('settings')" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition">⚙️</button>
-        </div>
+        
+        <!-- Standard Industry 3-Bar Hamburger Menu Button -->
+        <button onclick="toggleSidebar()" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-500 hover:text-white transition" title="Open Main Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </header>
 
       <main class="p-5 pt-3 space-y-4 flex-1 overflow-y-auto pb-20">
+        <!-- Clean Banner without raw UID badge -->
         <div class="bg-slate-900 text-white rounded-3xl p-4 flex items-center justify-between shadow-lg relative overflow-hidden">
           <div class="absolute -right-6 -bottom-6 text-6xl opacity-10">🦊</div>
           <div class="flex items-center space-x-3 z-10">
             <span class="text-xl">✍️</span>
             <div>
               <p id="bannerText" class="text-xs font-bold">You have 0 tasks today.</p>
-              <p id="userUidBadge" class="text-[10px] font-mono text-emerald-400">UID: Loading...</p>
+              <p class="text-[10px] text-emerald-400 font-medium">High-performance daily execution</p>
             </div>
           </div>
         </div>
 
-        <!-- Dashboard Status Pie Chart -->
+        <!-- Live Status Overview -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <h4 class="text-xs font-extrabold uppercase text-slate-400">Live Status Overview</h4>
@@ -180,7 +181,7 @@
           </div>
         </div>
 
-        <!-- GitHub-Style Contribution Grid on Dashboard -->
+        <!-- GitHub Activity Heatmap -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <div class="flex justify-between items-center">
             <h3 class="text-xs font-extrabold uppercase text-slate-400">GitHub Activity Heatmap</h3>
@@ -189,7 +190,7 @@
           <div class="grid grid-cols-7 gap-1.5 p-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800" id="githubHeatmapGridDashboard"></div>
         </div>
 
-        <!-- Add Task Form -->
+        <!-- Task Input Box -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3 shadow-sm">
           <input id="taskInput" type="text" placeholder="Add a new task title..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-emerald-500 text-slate-900 dark:text-white">
           
@@ -270,7 +271,7 @@
 
 
     <!---------------------------------------------------------
-      6. PROGRESS VIEW (Full Scopes: Day, Week, Month, Year)
+      6. PROGRESS VIEW
     ---------------------------------------------------------->
     <div id="progressView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -279,7 +280,6 @@
       </header>
 
       <main class="p-5 space-y-4 flex-1 overflow-y-auto pb-20">
-        <!-- Full Progress Scope Switcher -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-[11px] font-bold text-slate-600 dark:text-slate-300">
           <button onclick="setProgressScope('day')" id="scopeBtnDay" class="flex-1 py-2 rounded-xl transition">Day</button>
           <button onclick="setProgressScope('week')" id="scopeBtnWeek" class="flex-1 py-2 rounded-xl transition">Week</button>
@@ -312,7 +312,7 @@
 
 
     <!---------------------------------------------------------
-      7. SETTINGS VIEW (Beta Social Card Restored)
+      7. SETTINGS VIEW
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -336,7 +336,6 @@
           <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold">Toggle 🌓</button>
         </div>
 
-        <!-- Restored Beta Feature Card -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
           <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
           <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups using your unique User ID.</p>
@@ -372,17 +371,36 @@
     </div>
   </div>
 
-  <!-- DAILY SIDEBAR DRAWER -->
+  <!-- STANDARDIZED SIDE MENU DRAWER (☰) -->
   <div id="dailySidebar" class="hidden fixed inset-y-0 right-0 w-80 bg-white dark:bg-slate-900 shadow-2xl z-50 p-6 flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
     <div class="space-y-4 overflow-y-auto flex-1">
-      <div class="flex justify-between items-center">
-        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Daily Task Drawer & Rollover</h3>
-        <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕ Close</button>
+      <div class="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-800">
+        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+          <span>☰</span>
+          <span>TaskMaster Drawer</span>
+        </h3>
+        <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕</button>
       </div>
-      <p class="text-xs text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
-      <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
+
+      <!-- Quick Action: Notifications -->
+      <button onclick="requestNotificationPermission()" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500 hover:text-white p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+        <div class="flex items-center space-x-2">
+          <span>🔔</span>
+          <span>Task Alarms & Reminders</span>
+        </div>
+        <span class="text-[10px] text-emerald-500 group-hover:text-white">Enable</span>
+      </button>
+
+      <div class="space-y-2 pt-2">
+        <h4 class="text-xs font-extrabold uppercase text-slate-400">Daily Task Drawer & Rollover</h4>
+        <p class="text-[11px] text-slate-500">Permanent routines automatically rollover daily so you never lose core habits.</p>
+        <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
+      </div>
     </div>
-    <button onclick="archiveDailyTasks()" class="w-full py-3 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md">Archive Today's Progress</button>
+    
+    <button onclick="archiveDailyTasks()" class="w-full py-3 bg-emerald-500 text-white font-bold text-xs rounded-2xl shadow-md hover:bg-emerald-600 transition">
+      Archive Today's Progress
+    </button>
   </div>
 
   <!-- EDIT TASK MODAL -->
@@ -430,7 +448,6 @@
       if (viewName === 'dashboard') {
         renderDashboardPie();
         renderGitHubHeatmapDashboard();
-        document.getElementById('userUidBadge').innerText = 'UID: ' + currentUid;
       }
       if (viewName === 'reports') renderReportsChart(activeChartType);
       if (viewName === 'progress') renderProgressView();
@@ -593,7 +610,6 @@
       document.getElementById('permCheck').checked = false;
       saveTasks();
 
-      // Sync Task directly to backend Apps Script
       try {
         await fetch(SCRIPT_URL, {
           method: 'POST',
@@ -690,7 +706,7 @@
       const list = document.getElementById('taskList');
       list.innerHTML = '';
       const pendingCount = tasks.filter(t => !t.done).length;
-      document.getElementById('bannerText').innerText = `You have ${pendingCount} pending tasks today.`;
+      document.getElementById('bannerText').innerText = pendingCount === 0 ? "You're all caught up today!" : `You have ${pendingCount} pending task${pendingCount > 1 ? 's' : ''} today.`;
       document.getElementById('taskCountBadge').innerText = `${pendingCount} pending`;
 
       if (tasks.length === 0) {
