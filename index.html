@@ -288,7 +288,6 @@
           </div>
         </div>
 
-        <!-- TINY GITHUB-STYLE CONTRIBUTION MATRIX FED FROM SHEETS -->
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-3.5 space-y-2 shadow-sm">
           <div class="flex justify-between items-center">
             <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">GitHub Activity Matrix (Live Sheets)</span>
@@ -318,7 +317,7 @@
 
 
     <!---------------------------------------------------------
-      7. SETTINGS VIEW (UID DISPLAYED HERE)
+      7. SETTINGS VIEW (WITH BETA SOCIAL INVITES INCLUDED)
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -340,6 +339,15 @@
             <p class="text-[10px] text-slate-400">Toggle UI theme</p>
           </div>
           <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold">Toggle 🌓</button>
+        </div>
+
+        <!-- BETA SOCIAL INVITES BUTTON CARD -->
+        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
+          <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
+          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups using your unique User ID.</p>
+          <button onclick="alert('Beta referral system active! Referral User ID: ' + currentUid)" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2.5 rounded-2xl hover:bg-emerald-500/20 transition">
+            Invite Friends (Beta)
+          </button>
         </div>
       </main>
 
