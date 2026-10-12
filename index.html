@@ -318,7 +318,7 @@
 
 
     <!---------------------------------------------------------
-      7. SETTINGS VIEW
+      7. SETTINGS VIEW (UID DISPLAYED HERE)
     ---------------------------------------------------------->
     <div id="settingsView" class="hidden flex-1 flex flex-col justify-between">
       <header class="p-5 pb-3 flex justify-between items-center border-b border-slate-100 dark:border-slate-800/60">
@@ -330,7 +330,7 @@
         <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-3">
           <h3 class="text-xs font-extrabold uppercase text-slate-400">Account Information</h3>
           <p class="text-xs text-slate-600 dark:text-slate-300">Signed in as: <span id="settingsEmailDisplay" class="font-bold">user@taskmaster.app</span></p>
-          <p class="text-[11px] text-emerald-500 font-mono">System User ID: <span id="settingsUidDisplay">UID-000000</span></p>
+          <p class="text-[11px] text-emerald-500 font-mono">System User ID: <span id="settingsUidDisplay" class="font-bold bg-emerald-500/10 px-2 py-0.5 rounded">UID-000000</span></p>
           <button onclick="logout()" class="w-full bg-rose-500/10 text-rose-500 font-bold text-xs py-2.5 rounded-2xl transition">Sign Out</button>
         </div>
 
@@ -340,14 +340,6 @@
             <p class="text-[10px] text-slate-400">Toggle UI theme</p>
           </div>
           <button onclick="toggleDarkMode()" class="px-4 py-2 rounded-2xl bg-slate-200 dark:bg-slate-700 text-xs font-bold">Toggle 🌓</button>
-        </div>
-
-        <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-4 space-y-2">
-          <h4 class="text-xs font-bold text-slate-900 dark:text-white">Beta Social Invites 🚀</h4>
-          <p class="text-[10px] text-slate-400">Invite friends over and create task collaboration groups using your unique User ID.</p>
-          <button onclick="alert('Beta referral system active! Referral User ID: ' + currentUid)" class="w-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs py-2 rounded-xl transition">
-            Invite Friends (Beta)
-          </button>
         </div>
       </main>
 
@@ -365,7 +357,7 @@
   <div id="circularTimeModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 w-full max-w-xs space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 text-center">
       <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Select Time (Circular Clock)</h3>
-      <div class="relative w-44 h-44 mx-auto bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-emerald-500/30 shadow-inner cursor-pointer" onclick="rotateClock(event)">
+      <div class="relative w-44 h-44 mx-auto bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-emerald-500/35 shadow-inner cursor-pointer" onclick="rotateClock(event)">
         <div id="clockHands" class="absolute text-xl font-black text-emerald-500">09:00 AM</div>
       </div>
       <div class="grid grid-cols-3 gap-2">
@@ -388,17 +380,8 @@
         <button onclick="toggleSidebar()" class="text-xs font-bold text-slate-400 hover:text-slate-600">✕</button>
       </div>
 
-      <button onclick="requestNotificationPermission()" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500 hover:text-white p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition">
-        <div class="flex items-center space-x-2">
-          <span>🔔</span>
-          <span>Task Alarms & Reminders</span>
-        </div>
-        <span class="text-[10px] text-emerald-500 group-hover:text-white">Enable</span>
-      </button>
-
       <div class="space-y-2 pt-2">
         <h4 class="text-xs font-extrabold uppercase text-slate-400">Daily Task Drawer & History</h4>
-        <p class="text-[11px] text-slate-500">View tasks synchronized from Google Sheets:</p>
         <div id="sidebarTaskList" class="space-y-2 pt-2"></div>
       </div>
     </div>
@@ -427,7 +410,7 @@
     let currentView = 'landing';
     let authMode = 'login';
     let currentUser = localStorage.getItem('tm_user') || null;
-    let currentUid = localStorage.getItem('tm_uid') || 'UID-GUEST';
+    let currentUid = localStorage.getItem('tm_uid') || ('UID-' + Math.random().toString(36).substring(2, 8).toUpperCase());
     let tasks = JSON.parse(localStorage.getItem('tm_tasks_' + currentUser)) || [];
     let archives = JSON.parse(localStorage.getItem('tm_archives_' + currentUser)) || [];
     let backendLogs = [];
@@ -440,6 +423,8 @@
     let chartInstance = null;
     let dashboardPieInstance = null;
     let progressMonthInstance = null;
+
+    localStorage.setItem('tm_uid', currentUid);
 
     function switchView(viewName) {
       ['landing', 'auth', 'onboarding', 'dashboard', 'reports', 'progress', 'settings'].forEach(v => {
@@ -458,6 +443,10 @@
           renderGitHubMicroMatrix();
           renderProgressView();
         });
+      }
+      if (viewName === 'settings') {
+        document.getElementById('settingsEmailDisplay').innerText = currentUser || 'Guest User';
+        document.getElementById('settingsUidDisplay').innerText = currentUid;
       }
 
       logActivity('NAVIGATE_VIEW_' + viewName.toUpperCase());
@@ -533,18 +522,6 @@
       renderSidebarTasks();
     }
 
-    function requestNotificationPermission() {
-      if (!("Notification" in window)) {
-        alert("Browser does not support desktop notifications.");
-        return;
-      }
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          new Notification("TaskMaster 🦊", { body: "Notifications & Alarms active for your tasks!" });
-        }
-      });
-    }
-
     async function sha256(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -577,18 +554,12 @@
           msg.innerText = result.message || 'Authentication failed.';
           msg.classList.remove('hidden');
           return;
-        } else {
-          currentUid = 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
         }
-      } catch (e) {
-        currentUid = 'UID-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-      }
+      } catch (e) {}
 
       currentUser = email;
       localStorage.setItem('tm_user', currentUser);
       localStorage.setItem('tm_uid', currentUid);
-      document.getElementById('settingsEmailDisplay').innerText = currentUser;
-      document.getElementById('settingsUidDisplay').innerText = currentUid;
       
       await fetchBackendData();
       switchView('dashboard');
@@ -718,7 +689,6 @@
       });
     }
 
-    // 52-WEEK MICRO MATRIX FED FROM GOOGLE SHEETS ACTIVITY LOGS
     function renderGitHubMicroMatrix() {
       const matrix = document.getElementById('githubMicroMatrix');
       if (!matrix) return;
